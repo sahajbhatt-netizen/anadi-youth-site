@@ -6,6 +6,7 @@
   <title>Thaal · Anadi Youth</title>
   <meta name="anadi-source-revision" content="sha256:9612811078eb7d8023859083084193a0d36d404dd0789b90a57392c6c4c26e39">
   <meta name="anadi-source-tab" content="t.79upcwbn6lxs">
+  <meta name="description" content="Food is something we prepare, share, enjoy, and depend on every day. Thaal turns that ordinary part of life into an act of devotion.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -489,10 +490,380 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
   .steps__item:nth-child(4n) { padding: 17px 4px; border-right: 0; border-bottom: 1px solid rgba(183,138,58,.26); }
   .steps__item:last-child { border-bottom: 0; }
 }
+
+/* Global site shell */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background: rgba(251,250,246,.96);
+  border-bottom: 1px solid rgba(37,38,45,.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.site-header__bar {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  flex: 0 0 auto;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-brand__logo {
+  width: 24px;
+  height: 40px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+.site-brand__name {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.site-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  min-height: 72px;
+}
+.site-nav__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.site-nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 72px;
+  padding: 0 11px;
+  color: #505159;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  bottom: 0;
+  height: 2px;
+  background: transparent;
+}
+.site-nav__link:hover { color: var(--indigo); }
+.site-nav__link--active { color: var(--indigo); }
+.site-nav__link--active::after { background: var(--gold); }
+.site-nav__link--disabled {
+  color: #99978f;
+  cursor: default;
+}
+.site-nav__soon {
+  margin-left: 6px;
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #9a7a40;
+}
+.site-nav__caret {
+  width: 20px;
+  height: 32px;
+  margin-left: -8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #86868b;
+  font-size: 15px;
+  pointer-events: none;
+}
+.site-nav__dropdown {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  width: 290px;
+  padding: 10px;
+  border: 1px solid rgba(37,38,45,.10);
+  border-radius: 0 0 14px 14px;
+  background: rgba(255,255,253,.99);
+  box-shadow: 0 18px 44px rgba(37,38,45,.10);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition: opacity .14s ease, transform .14s ease, visibility .14s ease;
+}
+.site-nav__item--has-children:hover .site-nav__dropdown,
+.site-nav__item--has-children:focus-within .site-nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.site-nav__dropdown-link {
+  display: block;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: #55565d;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.site-nav__dropdown-link:hover { background: var(--blue-wash); color: var(--indigo); }
+.site-nav__dropdown-link--overview {
+  margin-bottom: 5px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+  color: var(--indigo);
+}
+.site-nav__dropdown-link--active { color: var(--indigo); font-weight: 600; }
+.site-menu-toggle { display: none; }
+.site-mobile-nav { display: none; }
+
+.site-footer {
+  margin-top: 16px;
+  padding: 50px 0 0;
+  border-top: 1px solid var(--rule);
+  background: #f5f2e9;
+}
+.site-footer__inner {
+  display: grid;
+  grid-template-columns: minmax(260px, .9fr) minmax(0, 1.35fr);
+  gap: 70px;
+  align-items: start;
+  padding-bottom: 38px;
+}
+.site-footer__brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-footer__logo {
+  width: 118px;
+  height: 122px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+.site-footer__name {
+  display: block;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.05;
+}
+.site-footer__org {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.site-footer__tagline {
+  max-width: 390px;
+  margin: 17px 0 0;
+  color: #73736f;
+  font-size: 13px;
+  line-height: 1.62;
+}
+.site-footer__menus {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(150px, .8fr);
+  gap: 48px;
+}
+.site-footer__heading {
+  margin-bottom: 13px;
+  color: #8a7446;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.site-footer__nav,
+.site-footer__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+.site-footer__socials {
+  align-items: flex-start;
+}
+.site-footer__link,
+.site-footer__social,
+.site-footer__legal-link {
+  color: #62636a;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+.site-footer__social {
+  display: inline-flex;
+  gap: 5px;
+  align-items: baseline;
+}
+.site-footer__link:hover,
+.site-footer__link--active,
+.site-footer__social:hover,
+.site-footer__legal-link:hover { color: var(--indigo); }
+.site-footer__link--disabled { color: #aaa89f; }
+.site-footer__soon {
+  margin-left: 4px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #9a7a40;
+}
+.site-footer__bottom {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-top: 1px solid rgba(37,38,45,.10);
+}
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 22px;
+}
+.site-footer__legal-link {
+  font-size: 11px;
+  color: #7b7b77;
+}
+.site-footer__copyright {
+  flex: 0 0 auto;
+  color: #92918b;
+  font-size: 11px;
+}
+
+@media (max-width: 1040px) {
+  .site-header__bar { min-height: 66px; }
+  .site-nav { display: none; }
+  .site-menu-toggle {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    padding: 0 4px 0 12px;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font: 600 13px/1 Inter, sans-serif;
+    cursor: pointer;
+  }
+  .site-menu-toggle__icon {
+    width: 31px;
+    height: 31px;
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    border: 1px solid rgba(53,64,122,.18);
+    border-radius: 50%;
+  }
+  .site-menu-toggle__icon i {
+    display: block;
+    width: 12px;
+    height: 1px;
+    background: var(--indigo);
+    transition: transform .15s ease;
+  }
+  .site-header.is-menu-open .site-menu-toggle__icon i:first-child { transform: translateY(3px) rotate(45deg); }
+  .site-header.is-menu-open .site-menu-toggle__icon i:last-child { transform: translateY(-3px) rotate(-45deg); }
+  .site-mobile-nav {
+    max-height: 0;
+    overflow: hidden;
+    display: block;
+    border-top: 1px solid transparent;
+    background: var(--paper);
+    transition: max-height .24s ease;
+  }
+  .site-header.is-menu-open .site-mobile-nav {
+    max-height: calc(100vh - 66px);
+    overflow-y: auto;
+    border-top-color: var(--rule);
+  }
+  .site-mobile-nav__group,
+  .site-mobile-nav__single,
+  .site-mobile-nav__planned {
+    width: min(calc(100% - 48px), var(--max));
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .site-mobile-nav__group summary {
+    padding: 17px 0;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .site-mobile-nav__group summary::-webkit-details-marker { display: none; }
+  .site-mobile-nav__group summary::after { content: "+"; float: right; color: var(--gold); font-weight: 400; }
+  .site-mobile-nav__group[open] summary::after { content: "−"; }
+  .site-mobile-nav__children { padding: 0 0 12px 14px; }
+  .site-mobile-nav__child {
+    display: block;
+    padding: 8px 0;
+    color: #65666d;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .site-mobile-nav__child--overview,
+  .site-mobile-nav__child--active { color: var(--indigo); font-weight: 600; }
+  .site-mobile-nav__single {
+    display: block;
+    padding: 17px 0;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .site-mobile-nav__single--active { color: var(--indigo); }
+  .site-mobile-nav__planned {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 0;
+    color: #99978f;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header__bar { min-height: 62px; }
+  .site-brand__logo { width: 22px; height: 37px; }
+  .site-brand__name { font-size: 19px; }
+  .site-menu-toggle__label { display: none; }
+  .site-header.is-menu-open .site-mobile-nav { max-height: calc(100vh - 62px); }
+  .site-mobile-nav__group,
+  .site-mobile-nav__single,
+  .site-mobile-nav__planned { width: min(calc(100% - 36px), var(--max)); }
+  .site-footer { padding-top: 38px; }
+  .site-footer__inner { grid-template-columns: 1fr; gap: 30px; padding-bottom: 28px; }
+  .site-footer__menus { grid-template-columns: 1fr; gap: 28px; }
+  .site-footer__nav, .site-footer__socials { justify-content: flex-start; gap: 10px 20px; }
+  .site-footer__bottom { min-height: 0; padding: 20px 0 26px; align-items: flex-start; flex-direction: column; gap: 14px; }
+  .site-footer__copyright { flex: initial; }
+}
 </style>
-  <meta name="anadi-published-at" content="2026-10-06T11:49:54.553Z">
+  <meta name="anadi-published-at" content="2026-10-06T16:27:38.715Z">
 </head>
 <body class="template--journal family--practice">
+  <header class="site-header" id="siteHeader"><div class="wrap site-header__bar"><a class="site-brand" data-destination="/" href="#" aria-label="Anadi Youth home"><img class="site-brand__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-mark.svg" alt="" aria-hidden="true"><span class="site-brand__name">Anadi Youth</span></a><nav class="site-nav" aria-label="Primary navigation"><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="#" data-destination="/find-yourself">Find Yourself</a><button class="site-nav__caret" type="button" aria-label="Show Find Yourself pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/find-yourself">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link site-nav__link--active" href="#" data-destination="/practice">Practice</a><button class="site-nav__caret" type="button" aria-label="Show Practice pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/practice">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/prayer">Prayer</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/puja">Puja</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/aarti">Aarti</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/mala">Mala</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/darshan">Darshan</a><a class="site-nav__dropdown-link site-nav__dropdown-link--active" href="#" data-destination="/practice/thaal">Thaal</a></div></div><div class="site-nav__item"><span class="site-nav__link site-nav__link--disabled" aria-disabled="true">Gnan &amp; Philosophy<span class="site-nav__soon">Soon</span></span></div><div class="site-nav__item"><span class="site-nav__link site-nav__link--disabled" aria-disabled="true">Guidance<span class="site-nav__soon">Soon</span></span></div><div class="site-nav__item"><span class="site-nav__link site-nav__link--disabled" aria-disabled="true">Resources<span class="site-nav__soon">Soon</span></span></div></nav><button class="site-menu-toggle" id="siteMenuToggle" type="button" aria-controls="siteMobileNav" aria-expanded="false"><span class="site-menu-toggle__label">Menu</span><span class="site-menu-toggle__icon" aria-hidden="true"><i></i><i></i></span></button></div><nav class="site-mobile-nav" id="siteMobileNav" aria-label="Mobile navigation"><details class="site-mobile-nav__group"><summary>Find Yourself</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/find-yourself">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></details><details class="site-mobile-nav__group" open><summary>Practice</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/practice">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/prayer">Prayer</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/puja">Puja</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/aarti">Aarti</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/mala">Mala</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/darshan">Darshan</a><a class="site-mobile-nav__child site-mobile-nav__child--active" href="#" data-destination="/practice/thaal">Thaal</a></div></details><div class="site-mobile-nav__planned"><span>Gnan &amp; Philosophy</span><span class="site-nav__soon">Soon</span></div><div class="site-mobile-nav__planned"><span>Guidance</span><span class="site-nav__soon">Soon</span></div><div class="site-mobile-nav__planned"><span>Resources</span><span class="site-nav__soon">Soon</span></div></nav></header>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
   <header class="hero">
     <div class="wrap">
@@ -516,11 +887,12 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
       
     </main>
   </div>
+  <footer class="site-footer"><div class="wrap site-footer__inner"><div class="site-footer__brand"><a class="site-footer__brand-link" data-destination="/" href="#" aria-label="Anadi Youth home"><img class="site-footer__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-logo.svg" alt="Anadi Youth SMVS"></a><p class="site-footer__tagline">A place to understand yourself, grow spiritually, and move through life with greater awareness and purpose.</p></div><div class="site-footer__menus"><div class="site-footer__group"><div class="site-footer__heading">Explore</div><nav class="site-footer__nav" aria-label="Footer navigation"><a class="site-footer__link" href="#" data-destination="/find-yourself">Find Yourself</a><a class="site-footer__link site-footer__link--active" href="#" data-destination="/practice">Practice</a><span class="site-footer__link site-footer__link--disabled">Gnan &amp; Philosophy <span class="site-footer__soon">Soon</span></span><span class="site-footer__link site-footer__link--disabled">Guidance <span class="site-footer__soon">Soon</span></span><span class="site-footer__link site-footer__link--disabled">Resources <span class="site-footer__soon">Soon</span></span></nav></div><div class="site-footer__group"><div class="site-footer__heading">Follow</div><div class="site-footer__socials"><a class="site-footer__social" href="https://www.instagram.com/anadiyouthsmvs/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://youtube.com/@anadiyouthsmvs" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://medium.com/@AnadiYouthSMVS" target="_blank" rel="noopener noreferrer">Medium <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://www.reddit.com/r/KaranPhilosophies/" target="_blank" rel="noopener noreferrer">Reddit <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://open.spotify.com/artist/1akCDpi5dit6LDw5O64tyl" target="_blank" rel="noopener noreferrer">Spotify <span aria-hidden="true">↗</span></a></div></div></div></div><div class="wrap site-footer__bottom"><div class="site-footer__legal"><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/terms-conditions/">Terms &amp; Conditions</a><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/privacy-policy/">Privacy Policy</a><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/disclaimer/">Disclaimer</a></div><div class="site-footer__copyright">© 2026 Anadi Youth SMVS. All rights reserved.</div></div></footer>
   <script>(() => {
   const SITE_BASE = "";
   const STATIC_BASE = "https://sahajbhatt-netizen.github.io/anadi-youth-site";
   const PUBLISHER_BASE = "";
-  const KNOWN_ROUTES = ["/find-yourself","/find-yourself/discover-your-individuality","/find-yourself/who-are-you-becoming","/find-yourself/what-is-happening-inside-you","/find-yourself/you-have-a-role-to-play","/find-yourself/nij-darshan","/practice","/practice/how-to-practice","/practice/meditation-dhyan","/practice/prayer","/practice/puja","/practice/mansipuja","/practice/aarti","/practice/mala","/practice/darshan","/practice/thaal"];
+  const KNOWN_ROUTES = ["/","/find-yourself","/find-yourself/discover-your-individuality","/find-yourself/who-are-you-becoming","/find-yourself/what-is-happening-inside-you","/find-yourself/you-have-a-role-to-play","/find-yourself/nij-darshan","/practice","/practice/how-to-practice","/practice/meditation-dhyan","/practice/prayer","/practice/puja","/practice/mansipuja","/practice/aarti","/practice/mala","/practice/darshan","/practice/thaal"];
 
   const normalizeRoute = (value) => {
     const raw = String(value || "").trim();
@@ -536,15 +908,15 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
     if (SITE_BASE && path) {
       resolved = SITE_BASE.replace(/\/$/, "") + path;
     } else if (STATIC_BASE && path && KNOWN_ROUTES.includes(path)) {
-      resolved = STATIC_BASE.replace(/\/$/, "") + path + "/";
+      resolved = STATIC_BASE.replace(/\/$/, "") + (path === "/" ? "/" : path + "/");
     } else if (PUBLISHER_BASE && path && KNOWN_ROUTES.includes(path)) {
       resolved = PUBLISHER_BASE + "?page=" + encodeURIComponent(path);
     }
 
     if (resolved) {
       a.href = resolved;
-      a.target = "_top";
-      a.rel = "noopener";
+      a.removeAttribute("target");
+      a.removeAttribute("rel");
       a.removeAttribute("aria-disabled");
     } else {
       a.removeAttribute("href");
@@ -566,6 +938,24 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
+
+  const siteHeader = document.getElementById("siteHeader");
+  const siteMenuToggle = document.getElementById("siteMenuToggle");
+  const siteMobileNav = document.getElementById("siteMobileNav");
+  if (siteHeader && siteMenuToggle && siteMobileNav) {
+    const closeMenu = () => {
+      siteHeader.classList.remove("is-menu-open");
+      siteMenuToggle.setAttribute("aria-expanded", "false");
+    };
+    siteMenuToggle.addEventListener("click", () => {
+      const willOpen = !siteHeader.classList.contains("is-menu-open");
+      siteHeader.classList.toggle("is-menu-open", willOpen);
+      siteMenuToggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    });
+    siteMobileNav.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+    addEventListener("resize", () => { if (innerWidth > 1040) closeMenu(); });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeMenu(); });
+  }
 
   const progressBar = document.getElementById("progressBar");
   const updateProgress = () => {
