@@ -491,6 +491,161 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
   .steps__item:last-child { border-bottom: 0; }
 }
 
+
+/* Homepage */
+body.template--home { --family-accent: var(--gold); --family-track: rgba(183,138,58,.12); }
+.home-hero {
+  position: relative;
+  min-height: 680px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+  background:
+    radial-gradient(circle at 84% 14%, rgba(183,138,58,.13), transparent 28%),
+    linear-gradient(180deg, #fff 0%, var(--paper) 100%);
+}
+.home-hero__inner { position:relative; display:grid; place-items:center; padding-top:112px; padding-bottom:116px; text-align:center; }
+.home-hero__copy { position:relative; z-index:2; max-width:980px; margin:0 auto; }
+.home-hero h1 { max-width:980px; margin:0 auto; font-size:clamp(54px,7vw,90px); line-height:.98; }
+.home-hero__lede { max-width:790px; margin:30px auto 0; color:#3f4047; font-size:clamp(20px,2vw,25px); line-height:1.53; }
+.home-hero__body { max-width:720px; margin:18px auto 0; color:var(--muted); }
+.home-hero__actions { display:flex; justify-content:center; flex-wrap:wrap; gap:12px 14px; margin-top:30px; }
+.cta--disabled { opacity:.58; cursor:default; pointer-events:none; }
+.cta__soon { margin-left:6px; font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.home-hero__mark { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; }
+.home-hero__mark::before { content:""; position:absolute; width:520px; height:520px; border:1px solid rgba(53,64,122,.09); border-radius:50%; }
+.home-hero__mark img { position:relative; width:min(400px,48vw); max-height:520px; object-fit:contain; opacity:.07; }
+
+.home-section { padding:108px 0; }
+.home-section__grid { display:grid; grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr); gap:86px; align-items:start; }
+.home-section__intro { position:sticky; top:108px; }
+.home-section__intro h2,
+.home-statement h2,
+.home-showcase h2,
+.home-callout h2,
+.home-about h2,
+.home-next h2 { font-size:clamp(42px,5vw,66px); line-height:1.04; }
+.home-section__intro p { max-width:650px; color:var(--muted); margin:20px 0 0; }
+.choice-list { border-top:1px solid var(--rule); }
+.choice-item { display:grid; grid-template-columns:minmax(0,1fr) 100px; gap:24px; align-items:center; padding:30px 0; border-bottom:1px solid var(--rule); color:var(--ink); text-decoration:none; }
+a.choice-item { transition:transform .16s ease; }
+a.choice-item:hover { transform:translateX(4px); }
+.choice-item__kicker { margin-bottom:5px; color:#8a7446; font-size:10px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; }
+.choice-item h3 { font-size:clamp(25px,2.8vw,36px); line-height:1.12; }
+.choice-item p { max-width:680px; margin:9px 0 0; color:var(--muted); font-size:15px; line-height:1.58; }
+.choice-item__action { justify-self:end; color:var(--indigo); font-size:25px; }
+.choice-item__soon { color:#9a7a40; font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.choice-item--planned { color:#777771; }
+.choice-item--planned h3 { color:#73736f; }
+
+.home-statement { padding:100px 0; background:var(--blue-wash); border-top:1px solid rgba(53,64,122,.08); border-bottom:1px solid rgba(53,64,122,.08); }
+.home-statement__inner { max-width:900px; }
+.home-statement p { max-width:760px; margin:22px 0 0; color:#626570; font-size:18px; line-height:1.72; }
+.home-statement__action { margin-top:24px; }
+
+.home-showcase { padding:108px 0; }
+.home-showcase__head { max-width:760px; margin-bottom:46px; }
+.home-showcase__head p { max-width:680px; margin:18px 0 0; color:var(--muted); }
+.showcase-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr); gap:22px; align-items:stretch; }
+.showcase-card { position:relative; display:flex; flex-direction:column; min-height:268px; overflow:hidden; border:1px solid var(--rule); border-radius:22px; background:#fff; color:var(--ink); text-decoration:none; transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease; }
+a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-shadow:0 16px 36px rgba(35,38,47,.08); }
+.showcase-card__media { position:relative; height:148px; overflow:hidden; background:#ece9df; }
+.showcase-card__media img { width:100%; height:100%; display:block; object-fit:cover; }
+.showcase-card__media--pattern { isolation:isolate; background-color:#f1ede3; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='240' viewBox='0 0 520 240'%3E%3Cg fill='none'%3E%3Ccircle cx='92' cy='28' r='116' stroke='%2335407A' stroke-opacity='.20' stroke-width='1.5'/%3E%3Ccircle cx='466' cy='210' r='92' stroke='%23B78A3A' stroke-opacity='.34' stroke-width='1.5'/%3E%3Cpath d='M-30 205 L280 -30' stroke='%2335407A' stroke-opacity='.07' stroke-width='1'/%3E%3Cpath d='M190 270 L550 0' stroke='%23B78A3A' stroke-opacity='.09' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E"); background-size:cover; background-position:center; }
+.showcase-card__media--pattern::before,
+.showcase-card__media--pattern::after { content:""; position:absolute; border:1px solid rgba(53,64,122,.18); border-radius:50%; }
+.showcase-card__media--pattern::before { width:180px; height:180px; left:-44px; top:-82px; }
+.showcase-card__media--pattern::after { width:120px; height:120px; right:-26px; bottom:-64px; border-color:rgba(183,138,58,.32); }
+.showcase-card__media--pattern span { position:absolute; inset:0; background:repeating-linear-gradient(115deg, transparent 0 24px, rgba(53,64,122,.045) 25px 26px); }
+.showcase-card--pattern-2 .showcase-card__media--pattern { background:
+  radial-gradient(circle at 82% 26%, rgba(183,138,58,.25) 0 2px, transparent 3px 100%),
+  linear-gradient(145deg, rgba(53,64,122,.12), transparent 55%),
+  linear-gradient(180deg, #eef0f6, #f8f6f0); }
+.showcase-card--pattern-3 .showcase-card__media--pattern { background:
+  radial-gradient(circle at 22% 70%, rgba(53,64,122,.2) 0 2px, transparent 3px 100%),
+  linear-gradient(35deg, rgba(183,138,58,.12), transparent 58%),
+  linear-gradient(180deg, #f7f3ea, #ece8df); }
+.showcase-card__content { position:relative; z-index:2; display:flex; flex:1; flex-direction:column; align-items:flex-start; padding:26px 28px 28px; }
+.showcase-card__type { color:#9b742d; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+.showcase-card__meta { margin:8px 0 0; color:#7d786f; font-size:12px; font-weight:600; }
+.showcase-card h3 { margin-top:8px; font-size:clamp(25px,2.5vw,34px); line-height:1.08; }
+.showcase-card p { margin:13px 0 0; color:var(--muted); line-height:1.58; }
+.showcase-card__link { margin-top:auto; padding-top:22px; font-weight:600; color:var(--indigo); }
+.showcase-card__soon { margin-top:auto; padding-top:22px; color:#9a7a40; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+.showcase-card--lead { grid-row:span 2; min-height:558px; background:var(--indigo-deep); color:#fff; border-color:transparent; }
+.showcase-card--lead.showcase-card--fallback { background-color:#303a70; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='700' viewBox='0 0 1000 700'%3E%3Cg fill='none'%3E%3Ccircle cx='810' cy='130' r='290' stroke='%23FFFFFF' stroke-opacity='.20' stroke-width='2'/%3E%3Ccircle cx='120' cy='660' r='250' stroke='%23C89B3C' stroke-opacity='.58' stroke-width='2'/%3E%3Crect x='610' y='195' width='260' height='260' rx='54' transform='rotate(28 740 325)' stroke='%23FFFFFF' stroke-opacity='.16' stroke-width='2'/%3E%3Cpath d='M-80 480 L1060 160' stroke='%23C89B3C' stroke-opacity='.30' stroke-width='2'/%3E%3Cpath d='M80 60 L680 660' stroke='%23FFFFFF' stroke-opacity='.09' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E"); background-size:cover; background-position:center; }
+.showcase-card--lead.showcase-card--fallback .showcase-card__media { display:none; }
+.showcase-card--lead .showcase-card__media { position:absolute; inset:0; height:auto; }
+.showcase-card--lead .showcase-card__media img { height:100%; }
+.showcase-card--lead .showcase-card__media--pattern { background-color:#303a70; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='700' viewBox='0 0 1000 700'%3E%3Cg fill='none'%3E%3Ccircle cx='810' cy='130' r='290' stroke='%23FFFFFF' stroke-opacity='.18' stroke-width='2'/%3E%3Ccircle cx='120' cy='660' r='250' stroke='%23C89B3C' stroke-opacity='.48' stroke-width='2'/%3E%3Crect x='610' y='195' width='260' height='260' rx='54' transform='rotate(28 740 325)' stroke='%23FFFFFF' stroke-opacity='.13' stroke-width='2'/%3E%3Cpath d='M-80 480 L1060 160' stroke='%23C89B3C' stroke-opacity='.24' stroke-width='2'/%3E%3Cpath d='M80 60 L680 660' stroke='%23FFFFFF' stroke-opacity='.07' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E"); background-size:cover; background-position:center; }
+.showcase-card--lead .showcase-card__media--pattern::before { width:460px; height:460px; left:-120px; top:-180px; border-color:rgba(255,255,255,.26); }
+.showcase-card--lead .showcase-card__media--pattern::after { width:300px; height:300px; right:-70px; bottom:-130px; border-color:rgba(200,155,60,.58); }
+.showcase-card--lead .showcase-card__media--pattern span { background:repeating-linear-gradient(120deg, transparent 0 46px, rgba(255,255,255,.085) 47px 48px); }
+.showcase-card--lead .showcase-card__media--pattern span::before { content:""; position:absolute; width:360px; height:360px; right:90px; top:70px; border:2px solid rgba(255,255,255,.18); border-radius:42%; transform:rotate(28deg); }
+.showcase-card--lead .showcase-card__media--pattern span::after { content:""; position:absolute; width:130%; height:2px; left:-12%; top:43%; background:rgba(200,155,60,.32); transform:rotate(-11deg); transform-origin:center; }
+.showcase-card__shade { display:none; }
+.showcase-card--lead .showcase-card__shade { display:block; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(18,20,30,.02) 6%, rgba(18,20,30,.10) 42%, rgba(18,20,30,.78) 100%); }
+.showcase-card--lead .showcase-card__content { min-height:558px; justify-content:flex-end; padding:42px; }
+.showcase-card--lead .showcase-card__type { color:#efca78; }
+.showcase-card--lead .showcase-card__meta { color:rgba(255,255,255,.76); }
+.showcase-card--lead h3 { max-width:700px; font-size:clamp(38px,4.7vw,62px); }
+.showcase-card--lead p { max-width:650px; color:rgba(255,255,255,.82); font-size:17px; }
+.showcase-card--lead .showcase-card__link { color:#efca78; }
+.showcase-card--planned { filter:saturate(.78); }
+.showcase-card--planned::after { content:""; position:absolute; inset:0; z-index:3; pointer-events:none; background:rgba(251,250,246,.32); }
+.showcase-card--lead.showcase-card--planned::after { background:rgba(20,22,30,.20); }
+
+.home-callout { padding:96px 0; border-top:1px solid rgba(183,138,58,.18); border-bottom:1px solid rgba(183,138,58,.18); }
+.home-callout--gold { background:linear-gradient(108deg, rgba(248,240,223,.96) 0%, rgba(248,240,223,.72) 70%, rgba(248,240,223,.45) 100%); }
+.home-callout--blue { background:var(--blue-wash); }
+.home-callout__inner { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr); gap:84px; align-items:end; }
+.home-callout__copy p { max-width:700px; margin:20px 0 0; color:#5f594f; }
+.home-callout__actions { display:grid; gap:14px; justify-items:start; }
+
+.home-about { padding:98px 0; }
+.home-about__inner { max-width:870px; }
+.home-about p { max-width:760px; margin:20px 0 0; color:var(--muted); font-size:17px; line-height:1.7; }
+.home-about__action { margin-top:22px; }
+
+.home-next { padding:88px 0; background:var(--indigo-deep); color:white; }
+.home-next__inner { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:70px; align-items:end; }
+.home-next__eyebrow { margin-bottom:11px; color:#e4bd6b; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.home-next h2 { max-width:820px; }
+.home-next p { max-width:680px; margin:18px 0 0; color:rgba(255,255,255,.78); }
+.home-next__links { display:grid; gap:14px; min-width:230px; }
+.home-next__links a { color:#e7c476; text-decoration:none; font-weight:600; border-bottom:1px solid rgba(231,196,118,.4); padding-bottom:4px; }
+
+@media (max-width:900px) {
+  .home-hero { min-height:0; }
+  .home-hero__inner { padding-top:84px; padding-bottom:86px; }
+  .home-hero__mark::before { width:360px; height:360px; }
+  .home-section { padding:82px 0; }
+  .home-section__grid { grid-template-columns:1fr; gap:38px; }
+  .home-section__intro { position:static; }
+  .showcase-grid { grid-template-columns:1fr 1fr; }
+  .showcase-card--lead { grid-column:1 / -1; grid-row:auto; min-height:440px; }
+  .home-callout__inner { grid-template-columns:1fr; gap:36px; }
+  .home-next__inner { grid-template-columns:1fr; gap:38px; }
+  .home-next__links { min-width:0; max-width:360px; }
+}
+
+@media (max-width:640px) {
+  .home-hero__inner { padding-top:58px; padding-bottom:58px; }
+  .home-hero h1 { font-size:clamp(46px,13vw,65px); }
+  .home-hero__lede { font-size:19px; }
+  .home-hero__mark img { width:min(320px,78vw); opacity:.055; }
+  .home-section, .home-showcase { padding:66px 0; }
+  .choice-item { grid-template-columns:minmax(0,1fr); gap:14px; padding:25px 0; }
+  .choice-item__action { justify-self:start; font-size:20px; }
+  .showcase-grid { grid-template-columns:1fr; }
+  .showcase-card--lead { min-height:390px; }
+  .showcase-card--lead .showcase-card__content { min-height:390px; padding:30px 26px; }
+  .showcase-card { min-height:0; }
+  .showcase-card__content { padding:24px 22px 26px; }
+  .home-statement, .home-callout, .home-about, .home-next { padding:64px 0; }
+}
+
 /* Global site shell */
 .site-header {
   position: sticky;
@@ -860,10 +1015,10 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
   .site-footer__copyright { flex: initial; }
 }
 </style>
-  <meta name="anadi-published-at" content="2026-10-06T16:27:38.715Z">
+  <meta name="anadi-published-at" content="2026-10-07T18:23:48.714Z">
 </head>
 <body class="template--journal family--practice">
-  <header class="site-header" id="siteHeader"><div class="wrap site-header__bar"><a class="site-brand" data-destination="/" href="#" aria-label="Anadi Youth home"><img class="site-brand__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-mark.svg" alt="" aria-hidden="true"><span class="site-brand__name">Anadi Youth</span></a><nav class="site-nav" aria-label="Primary navigation"><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="#" data-destination="/find-yourself">Find Yourself</a><button class="site-nav__caret" type="button" aria-label="Show Find Yourself pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/find-yourself">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link site-nav__link--active" href="#" data-destination="/practice">Practice</a><button class="site-nav__caret" type="button" aria-label="Show Practice pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/practice">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/prayer">Prayer</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/puja">Puja</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/aarti">Aarti</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/mala">Mala</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/darshan">Darshan</a><a class="site-nav__dropdown-link site-nav__dropdown-link--active" href="#" data-destination="/practice/thaal">Thaal</a></div></div><div class="site-nav__item"><span class="site-nav__link site-nav__link--disabled" aria-disabled="true">Gnan &amp; Philosophy<span class="site-nav__soon">Soon</span></span></div><div class="site-nav__item"><span class="site-nav__link site-nav__link--disabled" aria-disabled="true">Guidance<span class="site-nav__soon">Soon</span></span></div><div class="site-nav__item"><span class="site-nav__link site-nav__link--disabled" aria-disabled="true">Resources<span class="site-nav__soon">Soon</span></span></div></nav><button class="site-menu-toggle" id="siteMenuToggle" type="button" aria-controls="siteMobileNav" aria-expanded="false"><span class="site-menu-toggle__label">Menu</span><span class="site-menu-toggle__icon" aria-hidden="true"><i></i><i></i></span></button></div><nav class="site-mobile-nav" id="siteMobileNav" aria-label="Mobile navigation"><details class="site-mobile-nav__group"><summary>Find Yourself</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/find-yourself">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></details><details class="site-mobile-nav__group" open><summary>Practice</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/practice">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/prayer">Prayer</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/puja">Puja</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/aarti">Aarti</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/mala">Mala</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/darshan">Darshan</a><a class="site-mobile-nav__child site-mobile-nav__child--active" href="#" data-destination="/practice/thaal">Thaal</a></div></details><div class="site-mobile-nav__planned"><span>Gnan &amp; Philosophy</span><span class="site-nav__soon">Soon</span></div><div class="site-mobile-nav__planned"><span>Guidance</span><span class="site-nav__soon">Soon</span></div><div class="site-mobile-nav__planned"><span>Resources</span><span class="site-nav__soon">Soon</span></div></nav></header>
+  <header class="site-header" id="siteHeader"><div class="wrap site-header__bar"><a class="site-brand" data-destination="/" href="#" aria-label="Anadi Youth home"><img class="site-brand__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-mark.svg" alt="" aria-hidden="true"><span class="site-brand__name">Anadi Youth</span></a><nav class="site-nav" aria-label="Primary navigation"><div class="site-nav__item"><span class="site-nav__link site-nav__link--disabled" aria-disabled="true">Gnan &amp; Philosophy<span class="site-nav__soon">Soon</span></span></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="#" data-destination="/find-yourself">Find Yourself</a><button class="site-nav__caret" type="button" aria-label="Show Find Yourself pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/find-yourself">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link site-nav__link--active" href="#" data-destination="/practice">Practice</a><button class="site-nav__caret" type="button" aria-label="Show Practice pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/practice">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/prayer">Prayer</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/puja">Puja</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/aarti">Aarti</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/mala">Mala</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/darshan">Darshan</a><a class="site-nav__dropdown-link site-nav__dropdown-link--active" href="#" data-destination="/practice/thaal">Thaal</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="#" data-destination="/guidance">Guidance</a><button class="site-nav__caret" type="button" aria-label="Show Guidance pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/guidance">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/why-a-satpurush">Why a Satpurush?</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/how-to-learn-from-a-satpurush">How to Learn from a Satpurush</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/meet-guruji">Meet Guruji</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/our-parampara">Our Parampara</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/get-guidance">Get Guidance</a></div></div><div class="site-nav__item"><span class="site-nav__link site-nav__link--disabled" aria-disabled="true">Community<span class="site-nav__soon">Soon</span></span></div></nav><button class="site-menu-toggle" id="siteMenuToggle" type="button" aria-controls="siteMobileNav" aria-expanded="false"><span class="site-menu-toggle__label">Menu</span><span class="site-menu-toggle__icon" aria-hidden="true"><i></i><i></i></span></button></div><nav class="site-mobile-nav" id="siteMobileNav" aria-label="Mobile navigation"><div class="site-mobile-nav__planned"><span>Gnan &amp; Philosophy</span><span class="site-nav__soon">Soon</span></div><details class="site-mobile-nav__group"><summary>Find Yourself</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/find-yourself">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></details><details class="site-mobile-nav__group" open><summary>Practice</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/practice">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/prayer">Prayer</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/puja">Puja</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/aarti">Aarti</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/mala">Mala</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/darshan">Darshan</a><a class="site-mobile-nav__child site-mobile-nav__child--active" href="#" data-destination="/practice/thaal">Thaal</a></div></details><details class="site-mobile-nav__group"><summary>Guidance</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/guidance">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/why-a-satpurush">Why a Satpurush?</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/how-to-learn-from-a-satpurush">How to Learn from a Satpurush</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/meet-guruji">Meet Guruji</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/our-parampara">Our Parampara</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/get-guidance">Get Guidance</a></div></details><div class="site-mobile-nav__planned"><span>Community</span><span class="site-nav__soon">Soon</span></div></nav></header>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
   <header class="hero">
     <div class="wrap">
@@ -887,12 +1042,12 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
       
     </main>
   </div>
-  <footer class="site-footer"><div class="wrap site-footer__inner"><div class="site-footer__brand"><a class="site-footer__brand-link" data-destination="/" href="#" aria-label="Anadi Youth home"><img class="site-footer__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-logo.svg" alt="Anadi Youth SMVS"></a><p class="site-footer__tagline">A place to understand yourself, grow spiritually, and move through life with greater awareness and purpose.</p></div><div class="site-footer__menus"><div class="site-footer__group"><div class="site-footer__heading">Explore</div><nav class="site-footer__nav" aria-label="Footer navigation"><a class="site-footer__link" href="#" data-destination="/find-yourself">Find Yourself</a><a class="site-footer__link site-footer__link--active" href="#" data-destination="/practice">Practice</a><span class="site-footer__link site-footer__link--disabled">Gnan &amp; Philosophy <span class="site-footer__soon">Soon</span></span><span class="site-footer__link site-footer__link--disabled">Guidance <span class="site-footer__soon">Soon</span></span><span class="site-footer__link site-footer__link--disabled">Resources <span class="site-footer__soon">Soon</span></span></nav></div><div class="site-footer__group"><div class="site-footer__heading">Follow</div><div class="site-footer__socials"><a class="site-footer__social" href="https://www.instagram.com/anadiyouthsmvs/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://youtube.com/@anadiyouthsmvs" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://medium.com/@AnadiYouthSMVS" target="_blank" rel="noopener noreferrer">Medium <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://www.reddit.com/r/KaranPhilosophies/" target="_blank" rel="noopener noreferrer">Reddit <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://open.spotify.com/artist/1akCDpi5dit6LDw5O64tyl" target="_blank" rel="noopener noreferrer">Spotify <span aria-hidden="true">↗</span></a></div></div></div></div><div class="wrap site-footer__bottom"><div class="site-footer__legal"><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/terms-conditions/">Terms &amp; Conditions</a><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/privacy-policy/">Privacy Policy</a><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/disclaimer/">Disclaimer</a></div><div class="site-footer__copyright">© 2026 Anadi Youth SMVS. All rights reserved.</div></div></footer>
+  <footer class="site-footer"><div class="wrap site-footer__inner"><div class="site-footer__brand"><a class="site-footer__brand-link" data-destination="/" href="#" aria-label="Anadi Youth home"><img class="site-footer__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-logo.svg" alt="Anadi Youth SMVS"></a><p class="site-footer__tagline">Becoming the ideal you, day by day, via Karan Satsang.</p></div><div class="site-footer__menus"><div class="site-footer__group"><div class="site-footer__heading">Explore</div><nav class="site-footer__nav" aria-label="Footer navigation"><span class="site-footer__link site-footer__link--disabled">Gnan &amp; Philosophy <span class="site-footer__soon">Soon</span></span><a class="site-footer__link" href="#" data-destination="/find-yourself">Find Yourself</a><a class="site-footer__link site-footer__link--active" href="#" data-destination="/practice">Practice</a><a class="site-footer__link" href="#" data-destination="/guidance">Guidance</a><span class="site-footer__link site-footer__link--disabled">Community <span class="site-footer__soon">Soon</span></span></nav></div><div class="site-footer__group"><div class="site-footer__heading">Follow</div><div class="site-footer__socials"><a class="site-footer__social" href="https://www.instagram.com/anadiyouthsmvs/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://youtube.com/@anadiyouthsmvs" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://medium.com/@AnadiYouthSMVS" target="_blank" rel="noopener noreferrer">Medium <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://www.reddit.com/r/KaranPhilosophies/" target="_blank" rel="noopener noreferrer">Reddit <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://open.spotify.com/artist/1akCDpi5dit6LDw5O64tyl" target="_blank" rel="noopener noreferrer">Spotify <span aria-hidden="true">↗</span></a></div></div></div></div><div class="wrap site-footer__bottom"><div class="site-footer__legal"><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/terms-conditions/">Terms &amp; Conditions</a><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/privacy-policy/">Privacy Policy</a><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/disclaimer/">Disclaimer</a></div><div class="site-footer__copyright">© 2026 Anadi Youth SMVS. All rights reserved.</div></div></footer>
   <script>(() => {
   const SITE_BASE = "";
   const STATIC_BASE = "https://sahajbhatt-netizen.github.io/anadi-youth-site";
   const PUBLISHER_BASE = "";
-  const KNOWN_ROUTES = ["/","/find-yourself","/find-yourself/discover-your-individuality","/find-yourself/who-are-you-becoming","/find-yourself/what-is-happening-inside-you","/find-yourself/you-have-a-role-to-play","/find-yourself/nij-darshan","/practice","/practice/how-to-practice","/practice/meditation-dhyan","/practice/prayer","/practice/puja","/practice/mansipuja","/practice/aarti","/practice/mala","/practice/darshan","/practice/thaal"];
+  const KNOWN_ROUTES = ["/","/find-yourself","/find-yourself/discover-your-individuality","/find-yourself/who-are-you-becoming","/find-yourself/what-is-happening-inside-you","/find-yourself/you-have-a-role-to-play","/find-yourself/nij-darshan","/practice","/practice/how-to-practice","/practice/meditation-dhyan","/practice/prayer","/practice/puja","/practice/mansipuja","/practice/aarti","/practice/mala","/practice/darshan","/practice/thaal","/guidance","/guidance/why-a-satpurush","/guidance/how-to-learn-from-a-satpurush","/guidance/meet-guruji","/guidance/our-parampara","/guidance/how-to-be-a-good-mentee","/guidance/get-guidance"];
 
   const normalizeRoute = (value) => {
     const raw = String(value || "").trim();
