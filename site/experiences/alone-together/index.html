@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alone Together · Oct 26 – 31, 2026</title>
+
+<!--
+  ALONE TOGETHER · standalone Anadi Youth event page
+
+  HOSTING
+  Publish this file at /experiences/alone-together/index.html on the Anadi Youth static site.
+
+  TO UPDATE LATER (links, challenges, times)
+  Change the values in the EDIT ZONE just below, then replace this file and republish.
+  Nothing below the edit zone needs touching.
+-->
+
+<script>
+/* EDIT ZONE
+   Text goes between the quotes. Leave a link as "" until you have it:
+   the page shows a "coming soon" label instead of a broken button. */
+var CONFIG = {
+
+  /* times = shown on the session ticket. weekTimes = shown in the week strip.
+     youtube = the live link. feedback = the post-session Google Form link. */
+  sessions: [
+    {
+      day: "Monday", date: "26", month: "October",
+      times: ["8:30 – 9:30 PM ET", "7:30 – 8:30 PM CT", "5:30 – 6:30 PM PT"],
+      weekTimes: ["8:30 PM ET", "7:30 PM CT", "5:30 PM PT"],
+      label: "Session 01",
+      title: "Psychologist × Monk: Loneliness and Solitude",
+      hook: "Two totally different worlds. One real conversation.",
+      blurb: "A psychologist and a monk sit down to discuss what loneliness actually is, why being alone isn’t always the enemy, and how to stop feeling invisible even when you’re surrounded.",
+      youtube: "",
+      feedback: ""
+    },
+    {
+      day: "Wednesday", date: "28", month: "October",
+      times: ["8:30 – 9:30 PM ET", "7:30 – 8:30 PM CT", "5:30 – 6:30 PM PT"],
+      weekTimes: ["8:30 PM ET", "7:30 PM CT", "5:30 PM PT"],
+      label: "Session 02",
+      title: "Let Others In",
+      hook: "Behind the “I’m Fine...”",
+      blurb: "We often build walls that keep loved ones out and deepen our isolation. Discover how vulnerability and opening our hearts to Maharaj and Guruji break those barriers, bringing comfort and connection when we feel most alone.",
+      youtube: "",
+      feedback: ""
+    },
+    {
+      day: "Saturday", date: "31", month: "October",
+      times: ["1:00 – 2:00 PM ET", "12:00 – 1:00 PM CT", "10:00 – 11:00 AM PT"],
+      weekTimes: ["1:00 PM ET", "12:00 PM CT", "10:00 AM PT"],
+      label: "Session 03",
+      title: "Make a Sound",
+      hook: "The Biology of Belonging",
+      blurb: "From lifting us through hard times to improving our physical and mental health, community plays a vital role in our well-being. Join us to discuss how recognizing our place and purpose in a group transforms how we experience loneliness.",
+      youtube: "",
+      feedback: ""
+    }
+  ],
+
+  mentoring: {
+    title: "Here if you want to talk.",
+    intro: "You can book a private conversation with a mentor, during the shibir or after it.*",
+    /* The disclaimer the asterisk points to. Shown here and under the
+       "Talk to someone" card at the bottom. */
+    note: "* Mentorship is not therapy and is not a substitute for professional mental health care.",
+    button: "Book a 1-on-1",
+    calendly: ""
+  },
+
+  /* Social accounts. These feed every follow button on the page. The Instagram
+     handle and the subreddit name also turn into links wherever they appear in
+     a challenge description. */
+  social: {
+    youtube: { handle: "@AnadiYouthSMVS", url: "https://www.youtube.com/@AnadiYouthSMVS" },
+    instagram: { handle: "@anadiyouthsmvs", url: "https://www.instagram.com/anadiyouthsmvs/" },
+    reddit: { name: "r/KaranPhilosophies", url: "https://www.reddit.com/r/KaranPhilosophies/" },
+    spotify: {
+      url: "https://open.spotify.com/artist/1akCDpi5dit6LDw5O64tyl?si=LTYwUYbFRUO8LFcQeQVZRQ",
+      embed: "https://open.spotify.com/embed/artist/1akCDpi5dit6LDw5O64tyl?utm_source=generator&si=1f3d5cb1ecf54f16"
+    }
+  },
+
+  /* Challenges and their points. Add, remove or reword lines freely.
+     Set showSampleTags to true to mark them all as samples. */
+  showSampleTags: false,
+  challenges: [
+    { name: "One Picture, One Thought", points: 10, blurb: "Post a photo of a quiet moment from your day, with one word for your state of mind. Tag @anadiyouthsmvs on Instagram and we may share it on our story, or post it on Reddit in r/KaranPhilosophies." },
+    { name: "Self-Compassion Letter", points: 20, blurb: "Write yourself a short note the way a loving friend or mentor would." },
+    { name: "The Unsaid Words", points: 25, blurb: "Tell someone close one feeling, appreciation or expectation you’ve kept to yourself." },
+    { name: "Active Listening", points: 15, blurb: "Have a 10-minute conversation where your only goal is to understand. Phone away." },
+    { name: "Micro-Service Act", points: 20, blurb: "Ease someone’s load: help in the kitchen unasked, or spend time with a child or an elder." },
+    { name: "The Connection Mirror", points: 25, blurb: "Check in on someone who might be feeling lonely or going quiet." }
+  ],
+
+  /* "The loneliness epidemic" section near the bottom of the page. */
+  why: {
+    title: "The loneliness epidemic",
+    paragraphs: [
+      "Loneliness is common, and it is more than a bad mood. The World Health Organization has called for social connection to be treated as a public health priority, because loneliness is linked to a higher risk of heart disease, stroke, diabetes, depression and early death.",
+      "It is also easy to hide, which is why it helps to say it out loud. This week is our way of doing that: naming it, understanding it, and learning how connection changes things."
+    ],
+    stats: [
+      { figure: "1 in 6", label: "people worldwide are affected by loneliness." },
+      { figure: "1 in 5", label: "young people aged 13 to 29 report feeling lonely (17 to 21%)." },
+      { figure: "2×", label: "People who are lonely are twice as likely to become depressed." }
+    ],
+    sourceName: "World Health Organization, Commission on Social Connection (2025)",
+    sourceUrl: "https://www.who.int/news/item/30-06-2025-social-connection-linked-to-improved-heath-and-reduced-risk-of-early-death"
+  },
+
+  /* Where people log their points (a form, a leaderboard...). */
+  pointsLogLink: "",
+  /* Optional one-line explanation shown next to it. */
+  pointsLogNote: ""
+};
+/* END OF EDIT ZONE */
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --indigo: #2C2F40;
+  --peach: #E28666;
+  --black: #000000;
+  --white: #FFFFFF;
+  --focus: #FFFFFF;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', 'Avenir Next', 'Century Gothic', sans-serif;
+  font-weight: 500;
+  color: var(--indigo);
+  background: var(--black);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+[hidden] { display: none !important; }
+
+.wrap { width: 100%; max-width: 1296px; margin: 0 auto; padding-left: 28px; padding-right: 28px; }
+
+/* ---------- shared pieces ---------- */
+.caps { text-transform: uppercase; }
+.pill {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 16px;
+  border: 2px solid currentColor; border-radius: 999px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; white-space: nowrap;
+}
+.pill--peach { background: var(--peach); border-color: var(--peach); color: var(--black); }
+.pill--black { background: var(--black); border-color: var(--black); color: var(--white); }
+.pill--tilt { transform: rotate(-3deg); }
+.pill--small-screens { display: none; }
+.pill svg { flex: none; }
+a.pill { text-decoration: none; transition: transform 0.15s ease; }
+a.pill:hover { transform: translateY(-2px); }
+.pill--handle { white-space: normal; padding-top: 6px; padding-bottom: 6px; border-radius: 20px; }
+.pill__handle { letter-spacing: 0.04em; text-transform: none; white-space: nowrap; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 999px;
+  border: 2px solid var(--tag-bg, currentColor);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap;
+}
+.tag--solid { background: var(--tag-bg); color: var(--tag-fg); }
+.tag--line { border-color: currentColor; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 26px; border: 2px solid transparent; border-radius: 999px;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: none; white-space: nowrap; max-width: 100%;
+  transition: transform 0.15s ease;
+}
+a.btn:hover { transform: translateY(-2px); }
+.btn svg { flex: none; }
+.btn--black  { background: var(--black);  color: var(--white); }
+.btn--indigo { background: var(--indigo); color: var(--white); }
+.btn--peach  { background: var(--peach);  color: var(--black); }
+.btn--ghost  { border-color: var(--white); color: var(--white); }
+.btn--line   { border-color: currentColor; background: transparent; color: inherit; }
+.btn--pop    { border-color: var(--black); box-shadow: 5px 5px 0 var(--black); min-height: 56px; padding: 0 28px; }
+.btn--soon   { border: 2px dashed currentColor; background: transparent; color: inherit; letter-spacing: 0.12em; white-space: normal; text-align: center; padding-top: 8px; padding-bottom: 8px; }
+
+/* ---------- hero ---------- */
+.hero { background: var(--indigo); color: var(--white); overflow: hidden; }
+.hero__inner { padding-top: 88px; padding-bottom: 104px; display: flex; flex-direction: column; gap: 88px; }
+.hero__top { display: flex; flex-direction: column; gap: 40px; }
+.hero__pills { display: flex; flex-wrap: wrap; gap: 10px; }
+.hero__title-box { position: relative; }
+.hero__title { font-size: clamp(48px, 12.4vw, 178px); font-weight: 800; letter-spacing: 0.02em; line-height: 0.95; text-transform: uppercase; }
+.hero__title span { display: block; }
+.hero__title .alone { color: var(--white); }
+.hero__title .together { color: var(--peach); }
+@supports (-webkit-text-stroke: 1px #000) and (paint-order: stroke fill) {
+  .hero__title .alone { color: var(--indigo); -webkit-text-stroke: 5px var(--white); paint-order: stroke fill; }
+}
+.hero__sticker {
+  position: absolute; top: 0; right: 2%;
+  width: clamp(92px, 13vw, 190px); height: clamp(92px, 13vw, 190px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  border: 2px solid var(--black); border-radius: 50%; background: var(--white); color: var(--black);
+  box-shadow: 6px 6px 0 var(--black); transform: rotate(12deg);
+}
+.hero__sticker small { font-size: clamp(10px, 1.2vw, 17px); font-weight: 700; letter-spacing: 0.24em; line-height: 1.2; }
+.hero__sticker b { font-size: clamp(20px, 3vw, 44px); font-weight: 800; letter-spacing: 0.02em; line-height: 1; }
+.hero__bottom { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px 64px; }
+.hero__copy { flex: 1 1 480px; min-width: 0; max-width: 680px; display: flex; flex-direction: column; gap: 16px; }
+.hero__lede { font-size: clamp(20px, 1.9vw, 26px); font-weight: 600; line-height: 1.35; text-wrap: balance; }
+.hero__desc { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.78); text-wrap: pretty; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: 16px; }
+
+/* ---------- week strip ---------- */
+.week { display: flex; flex-direction: column; gap: 20px; }
+.week__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; text-transform: uppercase; }
+.week__head b { font-size: 13px; font-weight: 700; letter-spacing: 0.28em; line-height: 22px; }
+.week__head span { font-size: 12px; font-weight: 700; letter-spacing: 0.24em; line-height: 22px; color: rgba(255,255,255,0.72); }
+.week__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; }
+.day {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px;
+  border: 2px solid rgba(255,255,255,0.4); border-radius: 24px; color: var(--white); text-decoration: none;
+}
+.day__dow { font-size: 13px; font-weight: 700; letter-spacing: 0.28em; line-height: 20px; text-transform: uppercase; }
+.day__num { font-size: 64px; font-weight: 800; letter-spacing: 0.02em; line-height: 64px; }
+.day__info { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; min-height: 28px; }
+.day__none { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.72); }
+.day__live { display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 999px; background: var(--black); color: var(--white); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.day__times { display: flex; flex-direction: column; gap: 2px; }
+.day__time { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; line-height: 18px; white-space: nowrap; }
+.day--live { border-color: var(--black); background: var(--peach); color: var(--black); box-shadow: 6px 6px 0 var(--black); transform: rotate(var(--tilt, -2deg)); transition: transform 0.15s ease; }
+a.day--live:hover { transform: rotate(0deg) translateY(-2px); }
+.bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 24px;
+  min-height: 60px; padding: 14px 28px; border: 2px solid var(--black); border-radius: 28px;
+  background: var(--white); color: var(--black); text-decoration: none; text-transform: uppercase;
+}
+.bar b { font-size: 14px; font-weight: 800; letter-spacing: 0.16em; line-height: 22px; }
+.bar span { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; line-height: 20px; }
+.bar--line { border-color: var(--peach); background: transparent; color: var(--peach); }
+
+/* ---------- section heads ---------- */
+.band { overflow: hidden; }
+.band__inner { padding-top: 112px; padding-bottom: 128px; display: flex; flex-direction: column; }
+.head { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.head__row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; }
+.head__title { font-size: clamp(40px, 5.6vw, 80px); font-weight: 800; letter-spacing: 0.03em; line-height: 1; text-transform: uppercase; }
+.head__meta { font-size: 13px; font-weight: 700; letter-spacing: 0.24em; line-height: 22px; text-transform: uppercase; }
+.head__text { max-width: 640px; font-size: 18px; line-height: 1.6; text-wrap: pretty; }
+
+/* ---------- lineup ---------- */
+.lineup { background: var(--white); color: var(--indigo); --focus: var(--black); }
+.lineup .band__inner { gap: 64px; }
+.tickets { display: flex; flex-direction: column; gap: 44px; }
+.ticket {
+  align-self: flex-start; width: min(100%, 1080px); display: flex;
+  border: 2px solid var(--black); border-radius: 28px; transform: rotate(var(--tilt, 0deg));
+}
+.ticket--right { align-self: flex-end; }
+.ticket--peach  { background: var(--peach);  color: var(--black);  box-shadow: 10px 10px 0 var(--black); --tilt: -0.8deg; --rule: rgba(0,0,0,0.6);       --line: var(--black);  --tag-bg: var(--black);  --tag-fg: var(--white); --btn-bg: var(--black);  --btn-fg: var(--white); --focus: var(--black); }
+.ticket--white  { background: var(--white);  color: var(--indigo); box-shadow: 10px 10px 0 var(--peach); --tilt: 0.6deg;  --rule: rgba(44,47,64,0.6);   --line: var(--indigo); --tag-bg: var(--indigo); --tag-fg: var(--white); --btn-bg: var(--indigo); --btn-fg: var(--white); --focus: var(--black); }
+.ticket--indigo { background: var(--indigo); color: var(--white);  box-shadow: 10px 10px 0 var(--black); --tilt: -0.5deg; --rule: rgba(255,255,255,0.55); --line: var(--peach);  --tag-bg: var(--peach);  --tag-fg: var(--black); --btn-bg: var(--peach);  --btn-fg: var(--black); --focus: var(--white); --num: var(--peach); }
+.stub {
+  flex: 0 0 280px; padding: 36px 28px 36px 36px; border-right: 2px dashed var(--rule);
+  display: grid; grid-template-columns: 1fr; align-content: start; row-gap: 6px;
+  grid-template-areas: "day" "num" "month" "time";
+}
+.stub__day, .stub__month { font-size: 13px; font-weight: 700; letter-spacing: 0.28em; line-height: 20px; text-transform: uppercase; }
+.stub__day { grid-area: day; }
+.stub__month { grid-area: month; }
+.stub__num { grid-area: num; font-size: 96px; font-weight: 800; letter-spacing: 0.01em; line-height: 92px; color: var(--num, inherit); }
+.stub__time { grid-area: time; display: flex; flex-direction: column; gap: 2px; margin-top: 14px; padding-top: 14px; border-top: 2px solid var(--line); font-size: 13px; font-weight: 800; letter-spacing: 0.08em; line-height: 20px; text-transform: uppercase; }
+.ticket__body { flex: 1 1 0; min-width: 0; padding: 36px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.ticket__title { font-size: clamp(24px, 2.6vw, 36px); font-weight: 800; letter-spacing: 0.03em; line-height: 1.12; text-transform: uppercase; }
+.ticket__hook { font-size: 19px; font-weight: 700; line-height: 1.4; }
+.ticket__blurb { max-width: 600px; font-size: 15px; line-height: 1.6; text-wrap: pretty; }
+.ticket__cta { display: flex; flex-wrap: wrap; gap: 10px 12px; padding-top: 10px; }
+.btn--ticket { background: var(--btn-bg); color: var(--btn-fg); }
+
+/* ---------- mentoring (a quiet aside, not a headline section) ---------- */
+.mentoring { background: var(--peach); color: var(--black); --focus: var(--black); }
+.mentoring .band__inner { padding-top: 64px; padding-bottom: 64px; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 64px; }
+.mentoring__copy { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.mentoring__title { font-size: clamp(26px, 2.8vw, 36px); font-weight: 800; letter-spacing: 0.03em; line-height: 1.1; text-transform: uppercase; }
+.mentoring__intro { max-width: 560px; font-size: 17px; font-weight: 600; line-height: 1.5; text-wrap: pretty; }
+.mentoring__note { max-width: 560px; font-size: 14px; font-weight: 500; line-height: 1.5; }
+.mentoring__action { flex: none; max-width: 100%; }
+
+/* ---------- challenges ---------- */
+.challenges { background: var(--black); color: var(--white); }
+.challenges .band__inner { gap: 56px; }
+.challenges .head__title i { font-style: normal; color: var(--peach); }
+.challenges .head__text { color: rgba(255,255,255,0.82); }
+.bento { display: flex; flex-wrap: wrap; gap: 24px; }
+.tile { flex: 1 1 280px; min-width: 0; padding: 32px; border-radius: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 36px; }
+.tile--wide { flex: 2 1 480px; }
+.tile--peach  { background: var(--peach);  color: var(--black);  box-shadow: 8px 8px 0 var(--white); --tag-bg: var(--black);  --tag-fg: var(--white); --pts-bg: var(--white); }
+.tile--white  { background: var(--white);  color: var(--indigo); box-shadow: 8px 8px 0 var(--peach); --tag-bg: var(--indigo); --tag-fg: var(--white); --pts-bg: var(--peach); }
+.tile--indigo { background: var(--indigo); color: var(--white);  --tag-bg: var(--white); --tag-fg: var(--black); --pts-bg: var(--peach); }
+.tile--line   { background: var(--black);  color: var(--white);  border: 2px solid var(--white); --tag-bg: var(--white); --tag-fg: var(--black); --pts-bg: var(--peach); }
+.tile__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.pts { flex: none; width: 88px; height: 88px; border: 2px solid var(--black); border-radius: 50%; background: var(--pts-bg); color: var(--black); display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(var(--tilt, 8deg)); }
+.pts b { font-size: 26px; font-weight: 800; line-height: 26px; }
+.pts small { font-size: 11px; font-weight: 800; letter-spacing: 0.18em; line-height: 14px; }
+.tile__text { display: flex; flex-direction: column; gap: 10px; }
+.tile__name { font-size: clamp(24px, 2.2vw, 30px); font-weight: 800; letter-spacing: 0.03em; line-height: 1.15; text-transform: uppercase; overflow-wrap: anywhere; }
+.tile__blurb { font-size: 16px; line-height: 1.55; }
+.tile__blurb a { font-weight: 700; text-underline-offset: 3px; }
+.log { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding: 24px 32px; border: 2px dashed rgba(255,255,255,0.55); border-radius: 28px; }
+.log__text { display: flex; flex-direction: column; gap: 6px; }
+.log__text b { font-size: 18px; font-weight: 800; letter-spacing: 0.08em; line-height: 26px; text-transform: uppercase; }
+.log__text span { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.82); }
+
+/* ---------- follow card and follow dock ---------- */
+.hero__links { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 14px; font-weight: 700; letter-spacing: 0.03em; line-height: 1.5; }
+.hero__links a { text-underline-offset: 4px; }
+.follow {
+  flex: 0 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 14px; padding: 24px;
+  border: 2px solid var(--black); border-radius: 28px; background: var(--white); color: var(--indigo);
+  box-shadow: 8px 8px 0 var(--black); transform: rotate(1.2deg); --focus: var(--black);
+}
+.follow__title { font-size: 22px; font-weight: 800; letter-spacing: 0.04em; line-height: 1.15; text-transform: uppercase; }
+.follow__text { font-size: 15px; line-height: 1.5; }
+.follow__btns { display: flex; flex-direction: column; gap: 10px; }
+.btn.btn--social { width: 100%; justify-content: flex-start; gap: 14px; min-height: 60px; padding: 8px 22px; text-align: left; white-space: normal; }
+.btn__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.btn__text b { font-weight: 800; }
+.btn__text small { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: none; overflow-wrap: anywhere; }
+.dock {
+  position: fixed; left: 50%; bottom: 16px; z-index: 50; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px; max-width: calc(100% - 24px); padding: 8px 8px 8px 20px;
+  border: 2px solid var(--black); border-radius: 999px; background: var(--white); color: var(--black);
+  box-shadow: 5px 5px 0 var(--black); --focus: var(--black);
+}
+.dock__label { margin-right: 4px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap; }
+.dock__btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+.dock__btn svg { flex: none; }
+.dock__btn--ig { background: var(--peach); color: var(--black); }
+.dock__btn--rd { background: var(--indigo); color: var(--white); }
+.dock__close { flex: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: inherit; font: inherit; font-size: 24px; line-height: 1; cursor: pointer; }
+.dock__close:focus-visible { outline: 3px solid var(--black); outline-offset: 2px; }
+
+/* ---------- the loneliness epidemic ---------- */
+.why { background: var(--white); color: var(--indigo); --focus: var(--black); }
+.why__grid { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 48px 64px; }
+.why__copy { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.why__title { font-size: clamp(36px, 4.4vw, 64px); font-weight: 800; letter-spacing: 0.03em; line-height: 1; text-transform: uppercase; overflow-wrap: anywhere; }
+.why__text { display: flex; flex-direction: column; gap: 14px; max-width: 560px; font-size: 18px; line-height: 1.6; text-wrap: pretty; }
+.why__source { font-size: 13px; line-height: 1.5; }
+.why__stats { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+.stat { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; padding: 24px 28px; border: 2px solid var(--black); border-radius: 28px; }
+.stat__figure { flex: none; font-size: clamp(44px, 5vw, 72px); font-weight: 800; letter-spacing: 0.01em; line-height: 1; white-space: nowrap; }
+.stat__label { flex: 1 1 200px; font-size: 17px; font-weight: 600; line-height: 1.4; }
+.stat--peach  { background: var(--peach);  color: var(--black);  box-shadow: 8px 8px 0 var(--black); transform: rotate(-1deg); }
+.stat--indigo { background: var(--indigo); color: var(--white);  box-shadow: 8px 8px 0 var(--peach); transform: rotate(0.8deg); }
+.stat--white  { background: var(--white);  color: var(--indigo); box-shadow: 8px 8px 0 var(--black); transform: rotate(-0.6deg); }
+.stat--indigo .stat__figure { color: var(--peach); }
+
+/* ---------- where to next ---------- */
+.next { background: var(--indigo); color: var(--white); }
+.next .band__inner { gap: 56px; }
+.next__title { font-size: clamp(32px, 5.2vw, 72px); font-weight: 800; letter-spacing: 0.03em; line-height: 1.02; text-transform: uppercase; }
+.next__grid { display: flex; flex-wrap: wrap; align-items: stretch; gap: 28px; }
+.ncard { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 32px; border: 2px solid var(--black); border-radius: 28px; box-shadow: 8px 8px 0 var(--black); }
+.ncard--peach { background: var(--peach); color: var(--black); --focus: var(--black); }
+.ncard--white { background: var(--white); color: var(--indigo); --focus: var(--black); }
+.ncard--line  { background: var(--indigo); color: var(--white); border-color: var(--white); box-shadow: 8px 8px 0 var(--peach); }
+.ncard__title { font-size: 26px; font-weight: 800; letter-spacing: 0.04em; line-height: 32px; text-transform: uppercase; }
+.ncard__text { font-size: 16px; line-height: 1.55; }
+.ncard .btn { margin-top: auto; }
+.ncard__text + .btn { position: relative; top: 8px; margin-bottom: 8px; }
+.ncard__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 14px; font-weight: 700; text-underline-offset: 4px; }
+.listen { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 40px; padding: 32px; border: 2px solid var(--white); border-radius: 28px; background: var(--black); color: var(--white); box-shadow: 8px 8px 0 var(--peach); }
+.listen__copy { flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.listen iframe { flex: 2 1 420px; min-width: 0; display: block; border: 0; border-radius: 12px; }
+.next__note { max-width: 720px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.82); }
+
+@media (max-width: 720px) {
+  .follow { flex-basis: 100%; transform: none; }
+  .ncard, .listen { padding: 24px; }
+  .stat { padding: 20px 24px; }
+}
+@media (max-width: 480px) {
+  .dock { padding-left: 8px; }
+  .dock__label { display: none; }
+  .dock__btn { padding: 0 14px; }
+}
+
+/* ---------- smaller screens ---------- */
+@media (max-width: 960px) {
+  .week__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .hero__sticker { display: none; }
+  .pill--small-screens { display: inline-flex; }
+  .hero__title .alone { -webkit-text-stroke-width: 3.5px; }
+}
+@media (max-width: 720px) {
+  .wrap { padding-left: 20px; padding-right: 20px; }
+  .hero__inner { padding-top: 56px; padding-bottom: 72px; gap: 64px; }
+  .band__inner { padding-top: 72px; padding-bottom: 88px; }
+  .mentoring .band__inner { padding-top: 48px; padding-bottom: 48px; }
+  .lineup .band__inner { gap: 44px; }
+  .tickets { gap: 32px; }
+  .ticket { flex-direction: column; box-shadow: 6px 6px 0 var(--shadow, var(--black)); }
+  .ticket--white { --shadow: var(--peach); }
+  .stub {
+    flex: none; padding: 24px 24px 20px; border-right: 0; border-bottom: 2px dashed var(--rule);
+    grid-template-columns: auto 1fr; column-gap: 16px; row-gap: 0; align-items: center;
+    grid-template-areas: "num day" "num month" "time time";
+  }
+  .stub__num { font-size: 64px; line-height: 60px; }
+  .stub__day { align-self: end; }
+  .stub__month { align-self: start; }
+  .stub__time { flex-direction: row; flex-wrap: wrap; gap: 2px 16px; }
+  .ticket__body { padding: 24px; }
+  .tile { padding: 24px; }
+  .log { padding: 20px 24px; }
+  .btn { white-space: normal; text-align: center; padding-top: 10px; padding-bottom: 10px; }
+}
+@media (max-width: 480px) {
+  .week__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .day { padding: 16px; }
+  .day__num { font-size: 52px; line-height: 52px; }
+  .bar { padding: 14px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .day--live, a.pill { transition: none; }
+}
+</style>
+</head>
+
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-instagram" viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol><symbol id="i-reddit" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z"/></symbol><symbol id="i-spotify" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></symbol></svg>
+
+<header class="hero">
+  <div class="wrap hero__inner">
+
+    <div class="hero__top">
+      <div class="hero__pills">
+        <span class="pill">Virtual Shibir</span>
+        <a class="pill pill--peach pill--handle" data-social="youtube" href="https://www.youtube.com/@AnadiYouthSMVS" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M9 8h7.5v8H9z"/><path fill="#000000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>Live on YouTube <span class="pill__handle">(<span data-handle="youtube">@AnadiYouthSMVS</span>)</span></span></a>
+        <span class="pill pill--small-screens">Oct 26 – 31</span>
+      </div>
+
+      <div class="hero__title-box">
+        <h1 class="hero__title"><span class="alone">Alone</span><span class="together">Together</span></h1>
+        <div class="hero__sticker"><small>OCT</small><b>26–31</b></div>
+      </div>
+
+      <div class="hero__bottom">
+        <div class="hero__copy">
+          <p class="hero__lede">You can be in a room full of people and still feel completely alone. Sound familiar?</p>
+          <p class="hero__desc">A week-long virtual shibir on loneliness, and how spirituality and a change in perspective can help. Three live sessions, plus challenges you can do any time.</p>
+          <p class="hero__links">
+            <a href="#sessions">See the lineup <span aria-hidden="true">↓</span></a>
+            <a href="#why">Learn more about the loneliness epidemic <span aria-hidden="true">→</span></a>
+          </p>
+        </div>
+        <div class="follow" id="follow">
+          <p class="follow__title">Stay in touch</p>
+          <p class="follow__text">Follow us to stay in touch and keep up with the event.</p>
+          <div class="follow__btns">
+            <a class="btn btn--peach btn--social" data-social="instagram" href="https://www.instagram.com/anadiyouthsmvs/" target="_blank" rel="noopener"><svg width="20" height="20" fill="currentColor" aria-hidden="true"><use href="#i-instagram"/></svg><span class="btn__text"><b>Follow on Instagram</b><small data-handle="instagram">@anadiyouthsmvs</small></span></a>
+            <a class="btn btn--indigo btn--social" data-social="reddit" href="https://www.reddit.com/r/KaranPhilosophies/" target="_blank" rel="noopener"><svg width="20" height="20" fill="currentColor" aria-hidden="true"><use href="#i-reddit"/></svg><span class="btn__text"><b>Join us on Reddit</b><small data-handle="reddit">r/KaranPhilosophies</small></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week__head"><b>The week at a glance</b><span>Oct 26 – 31</span></div>
+      <div class="week__grid" id="week"></div>
+      <a class="bar" href="#challenges">
+        <b><span data-count="challenges">6</span> challenges · open all week</b>
+        <span>Any day, any order</span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<main>
+
+<section class="band lineup" id="sessions">
+  <div class="wrap band__inner">
+    <div class="head__row">
+      <div class="head">
+        <a class="pill pill--black" style="min-height:32px;padding:0 14px" data-social="youtube" href="https://www.youtube.com/@AnadiYouthSMVS" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M9 8h7.5v8H9z"/><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>Live on YouTube</span></a>
+        <h2 class="head__title">The lineup</h2>
+      </div>
+      <div class="head__meta"><span data-count="sessions">3</span> sessions</div>
+    </div>
+    <div class="tickets" id="tickets"></div>
+  </div>
+</section>
+
+<section class="band challenges" id="challenges">
+  <div class="wrap band__inner">
+    <div class="head">
+      <span class="pill pill--peach" style="min-height:34px;padding:0 14px;transform:rotate(-2deg);white-space:normal">Open from Session 01 · all week</span>
+      <h2 class="head__title"><i data-count="challenges">6</i> challenges</h2>
+      <p class="head__text">Do them any time once Session 01 kicks off, session day or not, in any order. Each one earns points and takes you one small step toward connection.</p>
+    </div>
+    <div class="bento" id="bento"></div>
+    <div class="log" id="log">
+      <div class="log__text"><b>Log your points</b><span id="log-note"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band mentoring" id="mentoring">
+  <div class="wrap band__inner">
+    <div class="mentoring__copy">
+      <span class="pill pill--black" style="min-height:32px;padding:0 14px">1-on-1 mentorship</span>
+      <h2 class="mentoring__title" id="mentoring-title">Here if you want to talk.</h2>
+      <p class="mentoring__intro" id="mentoring-intro"></p>
+      <p class="mentoring__note" data-note="mentoring">* Mentorship is not therapy and is not a substitute for professional mental health care.</p>
+    </div>
+    <div class="mentoring__action" id="mentoring-action"></div>
+  </div>
+</section>
+
+<section class="band why" id="why">
+  <div class="wrap band__inner">
+    <div class="why__grid">
+      <div class="why__copy">
+        <span class="pill pill--black" style="min-height:32px;padding:0 14px">Why this matters</span>
+        <h2 class="why__title" id="why-title"></h2>
+        <div class="why__text" id="why-text"></div>
+        <p class="why__source" id="why-source"></p>
+      </div>
+      <div class="why__stats" id="why-stats"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band next" id="next">
+  <div class="wrap band__inner">
+    <div class="head">
+      <span class="pill pill--peach" style="min-height:34px;padding:0 14px;transform:rotate(-2deg)">Where to next</span>
+      <h2 class="next__title">Connection changes everything.</h2>
+    </div>
+    <div class="next__grid">
+      <article class="ncard ncard--peach">
+        <h3 class="ncard__title">Talk to someone</h3>
+        <p class="ncard__text">If you would like to talk something through, you can book a 1-on-1 conversation with one of our mentors.*</p>
+        <a class="btn btn--black" href="#mentoring">Book a time</a>
+      </article>
+      <article class="ncard ncard--white">
+        <h3 class="ncard__title">Ask anonymously</h3>
+        <p class="ncard__text">Have a question you would rather not put your name to? Ask it on Reddit, or join our discussions on the topic.</p>
+        <a class="btn btn--indigo" data-social="reddit" href="https://www.reddit.com/r/KaranPhilosophies/" target="_blank" rel="noopener"><svg width="20" height="20" fill="currentColor" aria-hidden="true"><use href="#i-reddit"/></svg><span>Join <span data-handle="reddit">r/KaranPhilosophies</span></span></a>
+      </article>
+      <article class="ncard ncard--line">
+        <h3 class="ncard__title">Stay in touch</h3>
+        <p class="ncard__text">Follow us on Instagram to keep up with the event and what comes after it.</p>
+        <a class="btn btn--peach" data-social="instagram" href="https://www.instagram.com/anadiyouthsmvs/" target="_blank" rel="noopener"><svg width="20" height="20" fill="currentColor" aria-hidden="true"><use href="#i-instagram"/></svg><span>Follow <span data-handle="instagram">@anadiyouthsmvs</span></span></a>
+      </article>
+    </div>
+    <article class="listen">
+      <div class="listen__copy">
+        <h3 class="ncard__title">Listen</h3>
+        <p class="ncard__text">Related songs, on our Spotify.</p>
+        <a class="ncard__link" data-social="spotify" href="https://open.spotify.com/artist/1akCDpi5dit6LDw5O64tyl?si=LTYwUYbFRUO8LFcQeQVZRQ" target="_blank" rel="noopener"><svg width="18" height="18" fill="currentColor" aria-hidden="true"><use href="#i-spotify"/></svg><span>Open in Spotify</span></a>
+      </div>
+      <iframe id="spotify-player" title="Spotify player" height="352" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </article>
+    <p class="next__note" data-note="mentoring">* Mentorship is not therapy and is not a substitute for professional mental health care.</p>
+  </div>
+</section>
+
+</main>
+
+<aside class="dock" id="dock" aria-label="Follow Anadi Youth" hidden>
+  <span class="dock__label">Stay in touch</span>
+  <a class="dock__btn dock__btn--ig" data-social="instagram" href="https://www.instagram.com/anadiyouthsmvs/" target="_blank" rel="noopener"><svg width="18" height="18" fill="currentColor" aria-hidden="true"><use href="#i-instagram"/></svg><span>Instagram</span></a>
+  <a class="dock__btn dock__btn--rd" data-social="reddit" href="https://www.reddit.com/r/KaranPhilosophies/" target="_blank" rel="noopener"><svg width="18" height="18" fill="currentColor" aria-hidden="true"><use href="#i-reddit"/></svg><span>Reddit</span></a>
+  <button class="dock__close" id="dock-close" type="button" aria-label="Hide this bar">×</button>
+</aside>
+
+<script>
+(function () {
+  function h(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = text;
+    return n;
+  }
+  function out(cls, url) {
+    var a = h('a', cls);
+    a.href = url; a.target = '_blank'; a.rel = 'noopener';
+    return a;
+  }
+  function linkify(node, text) {
+    var names = Object.keys(linkMap);
+    var rest = String(text);
+    while (rest) {
+      var at = -1, hit = '';
+      names.forEach(function (n) { var i = rest.indexOf(n); if (i !== -1 && (at === -1 || i < at)) { at = i; hit = n; } });
+      if (at === -1) { node.appendChild(document.createTextNode(rest)); break; }
+      if (at > 0) node.appendChild(document.createTextNode(rest.slice(0, at)));
+      var a = out('', linkMap[hit]);
+      a.textContent = hit;
+      node.appendChild(a);
+      rest = rest.slice(at + hit.length);
+    }
+  }
+  var PLAY = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg>';
+  var ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>';
+
+  var sessions = CONFIG.sessions || [];
+  var challenges = CONFIG.challenges || [];
+
+  /* social accounts: fill every follow button, and remember the names that become links */
+  var social = CONFIG.social || {};
+  var yt = social.youtube || {}, ig = social.instagram || {}, rd = social.reddit || {}, sp = social.spotify || {};
+  var linkMap = {};
+  if (ig.handle && ig.url) linkMap[ig.handle] = ig.url;
+  if (rd.name && rd.url) linkMap[rd.name] = rd.url;
+  [['youtube', yt.url], ['instagram', ig.url], ['reddit', rd.url], ['spotify', sp.url]].forEach(function (pair) {
+    [].forEach.call(document.querySelectorAll('[data-social="' + pair[0] + '"]'), function (a) { if (pair[1]) a.href = pair[1]; });
+  });
+  [].forEach.call(document.querySelectorAll('[data-handle="youtube"]'), function (n) { if (yt.handle) n.textContent = yt.handle; });
+  [].forEach.call(document.querySelectorAll('[data-handle="instagram"]'), function (n) { if (ig.handle) n.textContent = ig.handle; });
+  [].forEach.call(document.querySelectorAll('[data-handle="reddit"]'), function (n) { if (rd.name) n.textContent = rd.name; });
+  var player = document.getElementById('spotify-player');
+  if (sp.embed) player.src = sp.embed; else player.hidden = true;
+
+  /* counts */
+  [].forEach.call(document.querySelectorAll('[data-count="sessions"]'), function (n) { n.textContent = sessions.length; });
+  [].forEach.call(document.querySelectorAll('[data-count="challenges"]'), function (n) { n.textContent = challenges.length; });
+
+  /* week strip */
+  var DAYS = [['Mon', '26'], ['Tue', '27'], ['Wed', '28'], ['Thu', '29'], ['Fri', '30'], ['Sat', '31']];
+  var dayTilts = ['-2deg', '1.5deg', '-1.5deg'];
+  var liveCount = 0;
+  var week = document.getElementById('week');
+  DAYS.forEach(function (d) {
+    var s = sessions.filter(function (x) { return String(x.date) === d[1]; })[0];
+    var tile = s ? h('a', 'day day--live') : h('div', 'day');
+    tile.appendChild(h('span', 'day__dow', d[0]));
+    tile.appendChild(h('span', 'day__num', d[1]));
+    var info = h('span', 'day__info');
+    if (s) {
+      tile.href = '#sessions';
+      tile.style.setProperty('--tilt', dayTilts[liveCount++ % dayTilts.length]);
+      info.appendChild(h('span', 'day__live', 'Live'));
+    } else {
+      info.appendChild(h('span', 'day__none', 'No session'));
+    }
+    tile.appendChild(info);
+    if (s) {
+      var times = h('span', 'day__times');
+      (s.weekTimes || []).forEach(function (t) { times.appendChild(h('span', 'day__time', t)); });
+      tile.appendChild(times);
+    }
+    week.appendChild(tile);
+  });
+
+  /* session tickets */
+  var looks = ['peach', 'white', 'indigo'];
+  var tickets = document.getElementById('tickets');
+  sessions.forEach(function (s, i) {
+    var t = h('article', 'ticket ticket--' + looks[i % looks.length] + (i % 2 ? ' ticket--right' : ''));
+    var stub = h('div', 'stub');
+    stub.appendChild(h('div', 'stub__day', s.day));
+    stub.appendChild(h('div', 'stub__num', s.date));
+    stub.appendChild(h('div', 'stub__month', s.month));
+    var time = h('div', 'stub__time');
+    (s.times || []).forEach(function (t) { time.appendChild(h('div', '', t)); });
+    stub.appendChild(time);
+    var body = h('div', 'ticket__body');
+    var tags = h('div', 'tags');
+    tags.appendChild(h('span', 'tag tag--solid', s.label));
+    body.appendChild(tags);
+    body.appendChild(h('h3', 'ticket__title', s.title));
+    if (s.hook) body.appendChild(h('p', 'ticket__hook', s.hook));
+    if (s.blurb) body.appendChild(h('p', 'ticket__blurb', s.blurb));
+    var cta = h('div', 'ticket__cta');
+    if (s.youtube) {
+      var a = out('btn btn--ticket', s.youtube);
+      a.innerHTML = PLAY;
+      a.appendChild(h('span', '', 'Watch live'));
+      a.setAttribute('aria-label', 'Watch ' + s.label + ' live on YouTube');
+      cta.appendChild(a);
+    } else {
+      cta.appendChild(h('span', 'btn btn--soon', 'Watch link coming soon'));
+    }
+    if (s.feedback) {
+      var fb = out('btn btn--line', s.feedback);
+      fb.textContent = 'Give feedback';
+      fb.setAttribute('aria-label', 'Give feedback on ' + s.label);
+      cta.appendChild(fb);
+    } else {
+      cta.appendChild(h('span', 'btn btn--soon', 'Feedback form coming soon'));
+    }
+    body.appendChild(cta);
+    t.appendChild(stub);
+    t.appendChild(body);
+    tickets.appendChild(t);
+  });
+
+  /* mentoring */
+  var m = CONFIG.mentoring || {};
+  var intro = document.getElementById('mentoring-intro');
+  if (m.intro) intro.textContent = m.intro; else intro.hidden = true;
+  [].forEach.call(document.querySelectorAll('[data-note="mentoring"]'), function (n) { if (m.note) n.textContent = m.note; else n.hidden = true; });
+  if (m.title) document.getElementById('mentoring-title').textContent = m.title;
+  var mentoringAction = document.getElementById('mentoring-action');
+  if (m.calendly) {
+    var mb = out('btn btn--black', m.calendly);
+    mb.appendChild(h('span', '', m.button || 'Book a time'));
+    mb.insertAdjacentHTML('beforeend', ARROW);
+    mentoringAction.appendChild(mb);
+  } else {
+    mentoringAction.appendChild(h('span', 'btn btn--soon', 'Link coming soon'));
+  }
+
+  /* challenges */
+  var tileLooks = ['peach tile--wide', 'white', 'indigo', 'white', 'line', 'peach tile--wide'];
+  var ptsTilts = ['10deg', '-8deg', '6deg', '-10deg', '8deg', '-6deg'];
+  var bento = document.getElementById('bento');
+  challenges.forEach(function (c, i) {
+    var tile = h('article', 'tile tile--' + tileLooks[i % tileLooks.length]);
+    var top = h('div', 'tile__top');
+    var tags = h('div', 'tags');
+    tags.appendChild(h('span', 'tag tag--solid', 'Challenge ' + (i < 9 ? '0' : '') + (i + 1)));
+    if (CONFIG.showSampleTags) tags.appendChild(h('span', 'tag tag--line', 'Sample'));
+    top.appendChild(tags);
+    var pts = h('div', 'pts');
+    pts.style.setProperty('--tilt', ptsTilts[i % ptsTilts.length]);
+    pts.appendChild(h('b', '', '+' + c.points));
+    pts.appendChild(h('small', '', 'PTS'));
+    top.appendChild(pts);
+    var text = h('div', 'tile__text');
+    text.appendChild(h('h3', 'tile__name', c.name));
+    if (c.blurb) { var bp = h('p', 'tile__blurb'); linkify(bp, c.blurb); text.appendChild(bp); }
+    tile.appendChild(top);
+    tile.appendChild(text);
+    bento.appendChild(tile);
+  });
+
+  /* points log */
+  var note = document.getElementById('log-note');
+  note.textContent = CONFIG.pointsLogNote || '';
+  if (!note.textContent) note.hidden = true;
+  if (CONFIG.pointsLogLink) {
+    var logBtn = out('btn btn--peach', CONFIG.pointsLogLink);
+    logBtn.textContent = 'Log points';
+    document.getElementById('log').appendChild(logBtn);
+  } else {
+    document.getElementById('log').appendChild(h('span', 'btn btn--soon', 'Link coming soon'));
+  }
+
+  /* the loneliness epidemic */
+  var why = CONFIG.why || {};
+  document.getElementById('why-title').textContent = why.title || '';
+  var whyText = document.getElementById('why-text');
+  (why.paragraphs || []).forEach(function (t) { whyText.appendChild(h('p', '', t)); });
+  var statLooks = ['peach', 'indigo', 'white'];
+  var whyStats = document.getElementById('why-stats');
+  (why.stats || []).forEach(function (st, i) {
+    var card = h('div', 'stat stat--' + statLooks[i % statLooks.length]);
+    card.appendChild(h('div', 'stat__figure', st.figure));
+    card.appendChild(h('div', 'stat__label', st.label));
+    whyStats.appendChild(card);
+  });
+  var whySource = document.getElementById('why-source');
+  if (why.sourceName) {
+    whySource.appendChild(document.createTextNode('Source: '));
+    if (why.sourceUrl) { var sa = out('', why.sourceUrl); sa.textContent = why.sourceName; whySource.appendChild(sa); }
+    else whySource.appendChild(document.createTextNode(why.sourceName));
+  } else {
+    whySource.hidden = true;
+  }
+
+  /* follow dock: shows once the follow card in the hero has scrolled out of view */
+  var dock = document.getElementById('dock');
+  var followCard = document.getElementById('follow');
+  var dockDismissed = false;
+  function setDock(show) { dock.hidden = dockDismissed || !show; }
+  document.getElementById('dock-close').addEventListener('click', function () { dockDismissed = true; setDock(false); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      setDock(!e.isIntersecting && e.boundingClientRect.top < 0);
+    }).observe(followCard);
+  } else {
+    window.addEventListener('scroll', function () {
+      setDock(followCard.getBoundingClientRect().bottom < 0);
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
