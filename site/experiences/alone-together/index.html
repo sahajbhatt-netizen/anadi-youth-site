@@ -25,7 +25,7 @@
 
       /* Main Anadi Youth site: "/" resolves to the home page on the same domain.
          If this event page is hosted separately, use the full home URL here. */
-      homeUrl: "/",
+      homeUrl: "https://sahajbhatt-netizen.github.io/anadi-youth-site",
 
       /* times = shown on the session ticket. weekTimes = shown in the week strip.
          youtube = the live link. feedback = the post-session Google Form link. */
@@ -43,9 +43,21 @@
         },
         {
           day: "Wednesday", date: "28", month: "October",
+          times: ["9:00 – 10:00 PM ET", "8:00 – 9:00 PM CT", "6:00 – 7:00 PM PT"],
+          weekTimes: ["9:00 PM ET", "8:00 PM CT", "6:00 PM PT"],
+          label: "Session 02",
+          mystery: true,
+          title: "The Mystery Event",
+          hook: "Something special is coming. That’s all we can say (for now).",
+          blurb: "A surprise experience? A special guest? We’re keeping the details under wraps. Join us live to find out what we have planned.",
+          youtube: "",
+          feedback: ""
+        },
+        {
+          day: "Thursday", date: "29", month: "October",
           times: ["8:30 – 9:30 PM ET", "7:30 – 8:30 PM CT", "5:30 – 6:30 PM PT"],
           weekTimes: ["8:30 PM ET", "7:30 PM CT", "5:30 PM PT"],
-          label: "Session 02",
+          label: "Session 03",
           title: "Let Others In",
           hook: "Behind the “I’m Fine...”",
           blurb: "We often build walls that keep loved ones out and deepen our isolation. Discover how vulnerability and opening our hearts to Maharaj and Guruji break those barriers, bringing comfort and connection when we feel most alone.",
@@ -56,7 +68,7 @@
           day: "Saturday", date: "31", month: "October",
           times: ["1:00 – 2:00 PM ET", "12:00 – 1:00 PM CT", "10:00 – 11:00 AM PT"],
           weekTimes: ["1:00 PM ET", "12:00 PM CT", "10:00 AM PT"],
-          label: "Session 03",
+          label: "Session 04",
           title: "Make a Sound",
           hook: "The Biology of Belonging",
           blurb: "From lifting us through hard times to improving our physical and mental health, community plays a vital role in our well-being. Join us to discuss how recognizing our place and purpose in a group transforms how we experience loneliness.",
@@ -67,7 +79,7 @@
 
       mentoring: {
         title: "Here if you want to talk.",
-        intro: "You can book a private conversation with a mentor, during the shibir or after it.*",
+        intro: "You can book a private conversation with a mentor, during the Virtual Experience or afterward.*",
         /* The disclaimer the asterisk points to. Shown here and under the
            "Talk to someone" card at the bottom. */
         note: "* Mentorship is not therapy and is not a substitute for professional mental health care.",
@@ -92,12 +104,12 @@
          Set showSampleTags to true to mark them all as samples. */
       showSampleTags: false,
       challenges: [
-        {name: "One Picture, One Thought", points: 10, blurb: "Post a photo of a quiet moment from your day, with one word for your state of mind. Tag @anadiyouthsmvs on Instagram and we may share it on our story, or post it on Reddit in r/KaranPhilosophies."},
-        {name: "Self-Compassion Letter", points: 20, blurb: "Write yourself a short note the way a loving friend or mentor would."},
-        {name: "The Unsaid Words", points: 25, blurb: "Tell someone close one feeling, appreciation or expectation you’ve kept to yourself."},
-        {name: "Active Listening", points: 15, blurb: "Have a 10-minute conversation where your only goal is to understand. Phone away."},
-        {name: "Micro-Service Act", points: 20, blurb: "Ease someone’s load: help in the kitchen unasked, or spend time with a child or an elder."},
-        {name: "The Connection Mirror", points: 25, blurb: "Check in on someone who might be feeling lonely or going quiet."}
+        {name: "One Picture, One Thought", points: 100, blurb: "Post a photo of a quiet moment from your day, with one word for your state of mind. Tag @anadiyouthsmvs on Instagram and we may share it on our story, or post it on Reddit in r/KaranPhilosophies."},
+        {name: "Self-Compassion Letter", points: 200, blurb: "Write yourself a short note the way a loving friend or mentor would."},
+        {name: "The Unsaid Words", points: 250, blurb: "Tell someone close one feeling, appreciation or expectation you’ve kept to yourself."},
+        {name: "Active Listening", points: 150, blurb: "Have a 10-minute conversation where your only goal is to understand. Phone away."},
+        {name: "Micro-Service Act", points: 200, blurb: "Ease someone’s load: help in the kitchen unasked, or spend time with a child or an elder."},
+        {name: "Join the Conversation", points: 100, blurb: "Join a discussion on r/KaranPhilosophies. Leave a comment, ask a question, or answer someone else’s question."}
       ],
 
       /* "The loneliness epidemic" section near the bottom of the page. */
@@ -116,10 +128,13 @@
         sourceUrl: "https://www.who.int/news/item/30-06-2025-social-connection-linked-to-improved-heath-and-reduced-risk-of-early-death"
       },
 
-      /* Where people log their points (a form, a leaderboard...). */
+      /* Individual challenge submissions contribute to the shared community total. */
       pointsLogLink: "",
-      /* Optional one-line explanation shown next to it. */
-      pointsLogNote: ""
+      pointsLogNote: "Submit completed challenges to add your points to the community total.",
+
+      /* Link to the shared community points dashboard when it is ready.
+         Leave blank to display a Coming Soon placeholder. */
+      communityDashboardLink: ""
     };
     /* END OF EDIT ZONE */
   </script>
@@ -387,7 +402,6 @@
       text-decoration: none;
       transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
     }
-
 
     .site-nav__home svg {
       flex: none;
@@ -1304,6 +1318,27 @@
       color: rgba(255, 255, 255, 0.82);
     }
 
+    .points-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .log--dashboard {
+      border-color: var(--peach);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .log .btn {
+      flex: none;
+    }
+
+    @media (max-width: 960px) {
+      .points-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ---------- follow card and follow dock ---------- */
     .hero__links {
       display: flex;
@@ -1721,8 +1756,10 @@
         padding: 0 14px;
       }
 
-      .site-nav__brand {
-        display: none;
+      .site-nav__brand-mark {
+        width: 50px;
+        height: 50px;
+        padding: 6px;
       }
 
       .next__site {
@@ -1752,6 +1789,53 @@
 
       .hero__title .alone {
         -webkit-text-stroke-width: 3.5px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .origin__grid {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .origin__copy {
+        max-width: 730px;
+      }
+
+      .origin__media {
+        max-width: 750px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .origin .band__inner {
+        padding-top: 72px;
+        padding-bottom: 86px;
+        gap: 26px;
+      }
+
+      .origin__context {
+        font-size: 16px;
+      }
+
+      .origin__quote {
+        padding: 24px;
+      }
+
+      .origin__grid {
+        gap: 28px;
+      }
+
+      .origin__media {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        max-width: 440px;
+      }
+
+      .origin__portrait,
+      .origin__bookmark {
+        padding: 8px;
       }
     }
 
@@ -1918,7 +2002,7 @@
 
       <div class="hero__top">
         <div class="hero__pills">
-          <span class="pill">Virtual Shibir</span>
+          <span class="pill">Virtual Experience</span>
           <a class="pill pill--peach pill--handle" data-social="youtube" href="https://www.youtube.com/@AnadiYouthSMVS"
             target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="#FFFFFF" d="M9 8h7.5v8H9z" />
@@ -1938,8 +2022,8 @@
           <div class="hero__copy">
             <p class="hero__lede">You can be in a room full of people and still feel completely alone. Sound familiar?
             </p>
-            <p class="hero__desc">A week-long virtual shibir on loneliness, and how spirituality and a change in
-              perspective can help. Three live sessions, plus challenges you can do any time.</p>
+            <p class="hero__desc">A 6-day Virtual Experience on loneliness, and how spirituality and a change in
+              perspective can help. Four live sessions, plus challenges you can do any time.</p>
             <p class="hero__links">
               <a href="#sessions">See the lineup <span aria-hidden="true">↓</span></a>
               <a href="#sankalp">Why we put this together <span aria-hidden="true">→</span></a>
@@ -2007,12 +2091,19 @@
             style="min-height:34px;padding:0 14px;transform:rotate(-2deg);white-space:normal">Open from Session 01 · all
             week</span>
           <h2 class="head__title"><i data-count="challenges">6</i> challenges</h2>
-          <p class="head__text">Do them any time once Session 01 kicks off, session day or not, in any order. Each one
-            earns points and takes you one small step toward connection.</p>
+          <p class="head__text">Starting after Session 01, do the challenges on any day, in any order. You earn points
+            by taking part, but every point goes into our <strong>shared community total</strong>. As everyone’s
+            contributions add up, we’ll unlock more together. A Community Points Dashboard will show our progress.</p>
         </div>
         <div class="bento" id="bento"></div>
-        <div class="log" id="log">
-          <div class="log__text"><b>Log your points</b><span id="log-note"></span></div>
+        <div class="points-actions">
+          <div class="log" id="log">
+            <div class="log__text"><b>Log your contribution</b><span id="log-note"></span></div>
+          </div>
+          <div class="log log--dashboard" id="community-dashboard">
+            <div class="log__text"><b>Community Points Dashboard</b><span>See how everyone’s points add up in one shared
+                total.</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -2030,26 +2121,21 @@
       </div>
     </section>
 
+
     <section class="band origin" id="sankalp">
       <div class="wrap band__inner">
         <div class="head">
-          <span class="pill pill--peach" style="min-height:34px;padding:0 14px;transform:rotate(-2deg)">Why we made this
-            shibir</span>
+          <span class="pill pill--peach" style="min-height:34px;padding:0 14px;transform:rotate(-2deg)">Why this Virtual
+            Experience</span>
           <h2 class="origin__title">It started with Guruji’s sankalp.</h2>
         </div>
         <div class="origin__grid">
           <div class="origin__copy">
             <p class="origin__context">At Resonance in 2025, Guruji learned that many muktos were going through
-              difficult
-              times and sometimes felt they had no one with them. He hand-wrote a bookmark of reassurance and gave His
-              blessings
-              to help youth facing this struggle. As we looked deeper, we discovered how widespread loneliness has
-              become.
-              <em>Alone Together</em> grew from that sankalp to become a space for honest conversations, meaningful
-              connections,
-              and
-              spiritual strength.
-            </p>
+              difficult times and sometimes felt they had no one with them. He hand-wrote a bookmark of reassurance and
+              made a sankalp to help youth facing this struggle. As we looked deeper, we discovered how widespread
+              loneliness has become. <em>Alone Together</em> grew from that sankalp — a space for honest conversations,
+              meaningful connections, and spiritual strength.</p>
             <blockquote class="origin__quote">
               <span class="origin__quote-mark">Guruji’s blessing</span>
               <p class="origin__quote-text">“Maharaj and Mota Purush are with me, so why should I worry?”</p>
@@ -2267,6 +2353,7 @@
         var body = h('div', 'ticket__body');
         var tags = h('div', 'tags');
         tags.appendChild(h('span', 'tag tag--solid', s.label));
+        if (s.mystery) tags.appendChild(h('span', 'tag tag--line', 'Special surprise'));
         body.appendChild(tags);
         body.appendChild(h('h3', 'ticket__title', s.title));
         if (s.hook) body.appendChild(h('p', 'ticket__hook', s.hook));
@@ -2335,16 +2422,24 @@
         bento.appendChild(tile);
       });
 
-      /* points log */
+      /* Challenge submissions are individual; the dashboard shows the shared community total. */
       var note = document.getElementById('log-note');
       note.textContent = CONFIG.pointsLogNote || '';
       if (!note.textContent) note.hidden = true;
       if (CONFIG.pointsLogLink) {
         var logBtn = out('btn btn--peach', CONFIG.pointsLogLink);
-        logBtn.textContent = 'Log points';
+        logBtn.textContent = 'Log your points';
         document.getElementById('log').appendChild(logBtn);
       } else {
-        document.getElementById('log').appendChild(h('span', 'btn btn--soon', 'Link coming soon'));
+        document.getElementById('log').appendChild(h('span', 'btn btn--soon', 'Log link coming soon'));
+      }
+      var dashboard = document.getElementById('community-dashboard');
+      if (CONFIG.communityDashboardLink) {
+        var dashboardBtn = out('btn btn--peach', CONFIG.communityDashboardLink);
+        dashboardBtn.textContent = 'View community total';
+        dashboard.appendChild(dashboardBtn);
+      } else {
+        dashboard.appendChild(h('span', 'btn btn--soon', 'Dashboard coming soon'));
       }
 
       /* the loneliness epidemic */
