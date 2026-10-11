@@ -28,7 +28,7 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sahajbhatt-netizen.github.io/anadi-youth-site/#webpage","url":"https://sahajbhatt-netizen.github.io/anadi-youth-site/","name":"Anadi Youth - Becoming the ideal youth","description":"Explore yourself. Ask deeper questions. Understand God. And discover how spiritual wisdom can become something you actually live and experience.","inLanguage":"en","isPartOf":{"@id":"https://sahajbhatt-netizen.github.io/anadi-youth-site/#website"}},{"@type":"WebSite","@id":"https://sahajbhatt-netizen.github.io/anadi-youth-site/#website","url":"https://sahajbhatt-netizen.github.io/anadi-youth-site/","name":"Anadi Youth","description":"Explore yourself. Ask deeper questions. Understand God. And discover how spiritual wisdom can become something you actually live and experience.","inLanguage":"en","publisher":{"@id":"https://sahajbhatt-netizen.github.io/anadi-youth-site/#organization"}},{"@type":"Organization","@id":"https://sahajbhatt-netizen.github.io/anadi-youth-site/#organization","name":"Anadi Youth SMVS","url":"https://sahajbhatt-netizen.github.io/anadi-youth-site/","logo":"https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-logo.svg","sameAs":["https://www.instagram.com/anadiyouthsmvs/","https://youtube.com/@anadiyouthsmvs","https://medium.com/@AnadiYouthSMVS","https://www.reddit.com/r/KaranPhilosophies/","https://open.spotify.com/artist/1akCDpi5dit6LDw5O64tyl"]}]}</script>
   <meta name="anadi-source-revision" content="sha256:39737dceb41061cf0ef054bcc4ffdab197081030538b9c256b671cace5bd6ce2">
   <meta name="anadi-source-tab" content="t.fhpgv65dsnne">
-  <meta name="anadi-published-at" content="2026-10-11T11:47:54.464Z">
+  <meta name="anadi-published-at" content="2026-10-11T12:06:13.707Z">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -125,13 +125,35 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 .meta-item__value { color:#50515a; font-size:15px; line-height:1.55; font-weight:500; }
 .meta-item--hero .meta-item__value { font-size:16px; color:#474852; }
 
+/* A reading column is limited independently of whether a sidebar exists.
+   This also keeps Highlight/Deep surfaces aligned with body copy. */
 .page-grid {
+  --article-width: 910px;
+  --article-text-width: 880px;
   display: grid;
   grid-template-columns: minmax(0,1fr);
   padding: 66px 0 104px;
   align-items: start;
 }
-.page-grid--with-toc { grid-template-columns: minmax(0,1fr) 224px; gap: 60px; }
+.page-grid--with-toc {
+  --article-width: 850px;
+  --article-text-width: 825px;
+  grid-template-columns: minmax(0,1fr) 240px;
+  gap: 50px;
+}
+.page-grid .content { width:100%; max-width:var(--article-width); }
+/* Without a sidebar, center the article column instead of leaving a phantom
+   sidebar's worth of whitespace on its right. Hubs retain their wide grids. */
+.page-grid--no-toc .content { margin-inline:auto; }
+body.template--hub .page-grid .content,
+body.template--landing .page-grid .content,
+body.template--landing-page .page-grid .content { max-width:100%; }
+body.layout--no-toc:not(.template--hub):not(.template--landing):not(.template--landing-page) .hero > .wrap {
+  width:min(calc(100% - 48px),910px);
+}
+.page-grid .content .prose { max-width:var(--article-text-width); }
+.page-grid .content .chapter__title { max-width:var(--article-width); }
+.page-grid .content .chapter--gold .prose { max-width:100%; }
 .toc { position: sticky; top: 102px; min-width:0; }
 .toc__label { font-family: Fraunces, Georgia, serif; font-size: 18px; color: var(--ink); margin-bottom: 12px; }
 .toc__rule { width: 32px; height: 2px; background: var(--gold); margin-bottom: 15px; }
@@ -145,7 +167,8 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
   scrollbar-color: #d6d1c5 transparent;
   padding: 2px 5px 8px 0;
 }
-.toc__group { margin-bottom: 3px; }
+/* Let three-line (or longer) headings use their natural height and spacing. */
+.toc__group { margin-bottom: 6px; }
 .toc__heading-row { display:flex; align-items:flex-start; min-width:0; }
 .toc__link {
   position: relative;
@@ -155,7 +178,9 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
   text-decoration: none;
   font-size: 13px;
   line-height: 1.4;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
   transition: color .15s ease;
 }
 .toc__major { flex:1; min-width:0; border-left:1px solid #d8d4c9; }
@@ -182,8 +207,8 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 .toc__toggle:focus-visible { outline:2px solid rgba(53,64,122,.42); outline-offset:2px; }
 .toc__children { padding-left:11px; margin:0 0 8px 7px; }
 .toc__children[hidden] { display:none !important; }
-/* Long titles retain full text in the DOM and native title tooltip. */
-.toc__link { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden; }
+/* Never clip TOC headings: users need to see every authored heading. */
+.toc__link { display:block; white-space:normal; overflow:visible; -webkit-line-clamp:unset; line-clamp:unset; }
 .mobile-toc { display:none; margin-bottom:48px; }
 .mobile-toc details { border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
 .mobile-toc summary { padding:14px 0; color:var(--indigo); font-weight:600; font-size:14px; cursor:pointer; list-style:none; }
@@ -296,6 +321,9 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 @media (max-width:640px) {
   body { font-size:16px; line-height:1.72; }
   .wrap { width:min(calc(100% - 36px), var(--max)); }
+  body.layout--no-toc:not(.template--hub):not(.template--landing):not(.template--landing-page) .hero > .wrap {
+    width:min(calc(100% - 36px),910px);
+  }
   .hero { padding:58px 0 54px; }
   h1 { font-size:clamp(47px,14vw,68px); }
   .hero__lede { font-size:19px; }
@@ -304,7 +332,7 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
   .pause { padding:25px 20px 27px; margin-left:-4px; margin-right:-4px; }
   .pause::before { display:none; }
   .try { padding:22px 20px 24px; margin:28px -2px 0; }
-  .closing,.deep-inline { margin-left:-5px; margin-right:-5px; padding:32px 24px; border-radius:21px; }
+  .closing,.deep-inline { margin-left:0; margin-right:0; padding:32px 24px; border-radius:21px; }
 }
 @media (prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto; }
@@ -420,8 +448,8 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 .directory-item__links { margin-top: 18px; }
 
 .chapter--deep {
-  margin-left: -28px;
-  margin-right: -28px;
+  margin-left: 0;
+  margin-right: 0;
   padding: 52px 48px;
   border-radius: 26px;
   color: white;
@@ -487,8 +515,8 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 }
 
 .chapter--gold {
-  margin-left: -28px;
-  margin-right: -28px;
+  margin-left: 0;
+  margin-right: 0;
   padding: 44px 28px 46px;
   border-radius: 24px;
   background: linear-gradient(108deg, rgba(248,240,223,.96) 0%, rgba(248,240,223,.67) 68%, rgba(248,240,223,.34) 100%);
@@ -526,8 +554,8 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
     background: transparent;
   }
   .chapter--gold {
-    margin-left: -6px;
-    margin-right: -6px;
+    margin-left: 0;
+    margin-right: 0;
     padding: 32px 24px 34px;
     border-radius: 22px;
   }
@@ -555,8 +583,8 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 .directory-item__links { margin-top: 18px; }
 
 .chapter--deep {
-    margin-left: -5px;
-    margin-right: -5px;
+    margin-left: 0;
+    margin-right: 0;
     padding: 34px 24px 36px;
     border-radius: 22px;
   }
@@ -822,16 +850,22 @@ a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-sh
   color: #9a7a40;
 }
 .site-nav__caret {
-  width: 20px;
-  height: 32px;
-  margin-left: -8px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #86868b;
-  font-size: 15px;
-  pointer-events: none;
+  flex:0 0 30px;
+  width:30px;
+  height:44px;
+  margin-left:-7px;
+  padding:0;
+  border:0;
+  border-radius:7px;
+  background:transparent;
+  color:#86868b;
+  font:600 17px/1 Inter, sans-serif;
+  cursor:pointer;
 }
+.site-nav__caret:hover,
+.site-nav__item.is-dropdown-open .site-nav__caret { color:var(--indigo); background:rgba(53,64,122,.06); }
+.site-nav__caret[aria-expanded="true"] { transform:rotate(180deg); }
+.site-nav__caret:focus-visible { outline:2px solid rgba(53,64,122,.5); outline-offset:2px; }
 .site-nav__dropdown {
   position: absolute;
   top: calc(100% - 1px);
@@ -847,11 +881,15 @@ a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-sh
   transform: translateY(-5px);
   transition: opacity .14s ease, transform .14s ease, visibility .14s ease;
 }
-.site-nav__item--has-children:hover .site-nav__dropdown,
-.site-nav__item--has-children:focus-within .site-nav__dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+/* Fine-pointer devices retain hover. Touch/pen opens explicitly in JS, not
+   via sticky CSS :hover, so the first tap cannot accidentally navigate. */
+@media (hover:hover) and (pointer:fine) {
+  .site-nav__item--has-children:hover .site-nav__dropdown { opacity:1; visibility:visible; transform:translateY(0); }
+}
+.site-nav__item--has-children.is-dropdown-open .site-nav__dropdown {
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
 }
 .site-nav__dropdown-link {
   display: block;
@@ -1124,7 +1162,7 @@ a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-sh
 </style>
 </head>
 <body class="template--home family--home">
-  <header class="site-header" id="siteHeader"><div class="wrap site-header__bar"><a class="site-brand" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/" data-destination="/" aria-label="Anadi Youth home"><img class="site-brand__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-mark.svg" alt="" aria-hidden="true"><span class="site-brand__name">Anadi Youth</span></a><nav class="site-nav" aria-label="Primary navigation"><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/" data-destination="/gnan">Gnan &amp; Philosophy</a><button class="site-nav__caret" type="button" aria-label="Show Gnan &amp; Philosophy pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/" data-destination="/gnan">Overview</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/who-am-i/" data-destination="/gnan/who-am-i">Who Am I?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/why-am-i/" data-destination="/gnan/why-am-i">Why Am I?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/how-can-we-know-god/" data-destination="/gnan/how-can-we-know-god">How Can We Know God?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/who-is-god/" data-destination="/gnan/who-is-god">Who Is God?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/what-does-it-mean-to-attain-god/" data-destination="/gnan/what-does-it-mean-to-attain-god">What Does It Mean to Attain God?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/how-can-i-experience-god/" data-destination="/gnan/how-can-i-experience-god">How Can I Experience God?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/what-is-the-anadimukta-identity/" data-destination="/gnan/what-is-the-anadimukta-identity">What Is the Anadimukta Identity?</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/" data-destination="/find-yourself">Find Yourself</a><button class="site-nav__caret" type="button" aria-label="Show Find Yourself pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/" data-destination="/find-yourself">Overview</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/discover-your-individuality/" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/who-are-you-becoming/" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/what-is-happening-inside-you/" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/you-have-a-role-to-play/" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/nij-darshan/" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/" data-destination="/practice">Practice</a><button class="site-nav__caret" type="button" aria-label="Show Practice pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/" data-destination="/practice">Overview</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/how-to-practice/" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/meditation-dhyan/" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/prayer/" data-destination="/practice/prayer">Prayer</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/puja/" data-destination="/practice/puja">Puja</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/mansipuja/" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/aarti/" data-destination="/practice/aarti">Aarti</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/mala/" data-destination="/practice/mala">Mala</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/darshan/" data-destination="/practice/darshan">Darshan</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/thaal/" data-destination="/practice/thaal">Thaal</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/" data-destination="/guidance">Guidance</a><button class="site-nav__caret" type="button" aria-label="Show Guidance pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/" data-destination="/guidance">Overview</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/why-a-satpurush/" data-destination="/guidance/why-a-satpurush">Why a Satpurush?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/how-to-learn-from-a-satpurush/" data-destination="/guidance/how-to-learn-from-a-satpurush">How to Learn from a Satpurush</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/meet-guruji/" data-destination="/guidance/meet-guruji">Meet Guruji</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/our-parampara/" data-destination="/guidance/our-parampara">Our Parampara</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/how-to-be-a-good-mentee/" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/get-guidance/" data-destination="/guidance/get-guidance">Get Guidance</a></div></div><div class="site-nav__item"><a class="site-nav__link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/community/" data-destination="/community">Community</a></div><details class="site-nav__item site-nav__item--more" id="siteMoreMenu"><summary class="site-nav__link site-nav__more-trigger">More<svg class="site-nav__more-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4L6 8L10 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="site-nav__dropdown site-nav__dropdown--more"><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/anadi-way/" data-destination="/anadi-way">The Anadi Way</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/resources/" data-destination="/resources">Resources</a></div></details></nav><button class="site-menu-toggle" id="siteMenuToggle" type="button" aria-controls="siteMobileNav" aria-expanded="false"><span class="site-menu-toggle__label">Menu</span><span class="site-menu-toggle__icon" aria-hidden="true"><i></i><i></i></span></button></div><nav class="site-mobile-nav" id="siteMobileNav" aria-label="Mobile navigation"><details class="site-mobile-nav__group"><summary>Gnan &amp; Philosophy</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/" data-destination="/gnan">Overview</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/who-am-i/" data-destination="/gnan/who-am-i">Who Am I?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/why-am-i/" data-destination="/gnan/why-am-i">Why Am I?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/how-can-we-know-god/" data-destination="/gnan/how-can-we-know-god">How Can We Know God?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/who-is-god/" data-destination="/gnan/who-is-god">Who Is God?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/what-does-it-mean-to-attain-god/" data-destination="/gnan/what-does-it-mean-to-attain-god">What Does It Mean to Attain God?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/how-can-i-experience-god/" data-destination="/gnan/how-can-i-experience-god">How Can I Experience God?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/what-is-the-anadimukta-identity/" data-destination="/gnan/what-is-the-anadimukta-identity">What Is the Anadimukta Identity?</a></div></details><details class="site-mobile-nav__group"><summary>Find Yourself</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/" data-destination="/find-yourself">Overview</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/discover-your-individuality/" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/who-are-you-becoming/" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/what-is-happening-inside-you/" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/you-have-a-role-to-play/" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/nij-darshan/" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></details><details class="site-mobile-nav__group"><summary>Practice</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/" data-destination="/practice">Overview</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/how-to-practice/" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/meditation-dhyan/" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/prayer/" data-destination="/practice/prayer">Prayer</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/puja/" data-destination="/practice/puja">Puja</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/mansipuja/" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/aarti/" data-destination="/practice/aarti">Aarti</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/mala/" data-destination="/practice/mala">Mala</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/darshan/" data-destination="/practice/darshan">Darshan</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/thaal/" data-destination="/practice/thaal">Thaal</a></div></details><details class="site-mobile-nav__group"><summary>Guidance</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/" data-destination="/guidance">Overview</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/why-a-satpurush/" data-destination="/guidance/why-a-satpurush">Why a Satpurush?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/how-to-learn-from-a-satpurush/" data-destination="/guidance/how-to-learn-from-a-satpurush">How to Learn from a Satpurush</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/meet-guruji/" data-destination="/guidance/meet-guruji">Meet Guruji</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/our-parampara/" data-destination="/guidance/our-parampara">Our Parampara</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/how-to-be-a-good-mentee/" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/get-guidance/" data-destination="/guidance/get-guidance">Get Guidance</a></div></details><a class="site-mobile-nav__single" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/community/" data-destination="/community">Community</a><details class="site-mobile-nav__group site-mobile-nav__group--more"><summary>More</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/anadi-way/" data-destination="/anadi-way">The Anadi Way</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/resources/" data-destination="/resources">Resources</a></div></details></nav></header>
+  <header class="site-header" id="siteHeader"><div class="wrap site-header__bar"><a class="site-brand" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/" data-destination="/" aria-label="Anadi Youth home"><img class="site-brand__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-mark.svg" alt="" aria-hidden="true"><span class="site-brand__name">Anadi Youth</span></a><nav class="site-nav" aria-label="Primary navigation"><div class="site-nav__item site-nav__item--has-children" data-site-subnav="true"><a class="site-nav__link" data-site-hub-link="true" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/" data-destination="/gnan">Gnan &amp; Philosophy</a><button class="site-nav__caret" type="button" data-site-subnav-trigger="true" aria-label="Show Gnan &amp; Philosophy pages" aria-expanded="false" aria-controls="site-subnav-gnan">⌄</button><div class="site-nav__dropdown" id="site-subnav-gnan"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/" data-destination="/gnan">Overview</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/who-am-i/" data-destination="/gnan/who-am-i">Who Am I?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/why-am-i/" data-destination="/gnan/why-am-i">Why Am I?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/how-can-we-know-god/" data-destination="/gnan/how-can-we-know-god">How Can We Know God?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/who-is-god/" data-destination="/gnan/who-is-god">Who Is God?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/what-does-it-mean-to-attain-god/" data-destination="/gnan/what-does-it-mean-to-attain-god">What Does It Mean to Attain God?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/how-can-i-experience-god/" data-destination="/gnan/how-can-i-experience-god">How Can I Experience God?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/what-is-the-anadimukta-identity/" data-destination="/gnan/what-is-the-anadimukta-identity">What Is the Anadimukta Identity?</a></div></div><div class="site-nav__item site-nav__item--has-children" data-site-subnav="true"><a class="site-nav__link" data-site-hub-link="true" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/" data-destination="/find-yourself">Find Yourself</a><button class="site-nav__caret" type="button" data-site-subnav-trigger="true" aria-label="Show Find Yourself pages" aria-expanded="false" aria-controls="site-subnav-find-yourself">⌄</button><div class="site-nav__dropdown" id="site-subnav-find-yourself"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/" data-destination="/find-yourself">Overview</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/discover-your-individuality/" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/who-are-you-becoming/" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/what-is-happening-inside-you/" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/you-have-a-role-to-play/" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/nij-darshan/" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></div><div class="site-nav__item site-nav__item--has-children" data-site-subnav="true"><a class="site-nav__link" data-site-hub-link="true" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/" data-destination="/practice">Practice</a><button class="site-nav__caret" type="button" data-site-subnav-trigger="true" aria-label="Show Practice pages" aria-expanded="false" aria-controls="site-subnav-practice">⌄</button><div class="site-nav__dropdown" id="site-subnav-practice"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/" data-destination="/practice">Overview</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/how-to-practice/" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/meditation-dhyan/" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/prayer/" data-destination="/practice/prayer">Prayer</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/puja/" data-destination="/practice/puja">Puja</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/mansipuja/" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/aarti/" data-destination="/practice/aarti">Aarti</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/mala/" data-destination="/practice/mala">Mala</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/darshan/" data-destination="/practice/darshan">Darshan</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/thaal/" data-destination="/practice/thaal">Thaal</a></div></div><div class="site-nav__item site-nav__item--has-children" data-site-subnav="true"><a class="site-nav__link" data-site-hub-link="true" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/" data-destination="/guidance">Guidance</a><button class="site-nav__caret" type="button" data-site-subnav-trigger="true" aria-label="Show Guidance pages" aria-expanded="false" aria-controls="site-subnav-guidance">⌄</button><div class="site-nav__dropdown" id="site-subnav-guidance"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/" data-destination="/guidance">Overview</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/why-a-satpurush/" data-destination="/guidance/why-a-satpurush">Why a Satpurush?</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/how-to-learn-from-a-satpurush/" data-destination="/guidance/how-to-learn-from-a-satpurush">How to Learn from a Satpurush</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/meet-guruji/" data-destination="/guidance/meet-guruji">Meet Guruji</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/our-parampara/" data-destination="/guidance/our-parampara">Our Parampara</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/how-to-be-a-good-mentee/" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/get-guidance/" data-destination="/guidance/get-guidance">Get Guidance</a></div></div><div class="site-nav__item"><a class="site-nav__link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/community/" data-destination="/community">Community</a></div><details class="site-nav__item site-nav__item--more" id="siteMoreMenu"><summary class="site-nav__link site-nav__more-trigger">More<svg class="site-nav__more-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4L6 8L10 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="site-nav__dropdown site-nav__dropdown--more"><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/anadi-way/" data-destination="/anadi-way">The Anadi Way</a><a class="site-nav__dropdown-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/resources/" data-destination="/resources">Resources</a></div></details></nav><button class="site-menu-toggle" id="siteMenuToggle" type="button" aria-controls="siteMobileNav" aria-expanded="false"><span class="site-menu-toggle__label">Menu</span><span class="site-menu-toggle__icon" aria-hidden="true"><i></i><i></i></span></button></div><nav class="site-mobile-nav" id="siteMobileNav" aria-label="Mobile navigation"><details class="site-mobile-nav__group"><summary>Gnan &amp; Philosophy</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/" data-destination="/gnan">Overview</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/who-am-i/" data-destination="/gnan/who-am-i">Who Am I?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/why-am-i/" data-destination="/gnan/why-am-i">Why Am I?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/how-can-we-know-god/" data-destination="/gnan/how-can-we-know-god">How Can We Know God?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/who-is-god/" data-destination="/gnan/who-is-god">Who Is God?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/what-does-it-mean-to-attain-god/" data-destination="/gnan/what-does-it-mean-to-attain-god">What Does It Mean to Attain God?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/how-can-i-experience-god/" data-destination="/gnan/how-can-i-experience-god">How Can I Experience God?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/what-is-the-anadimukta-identity/" data-destination="/gnan/what-is-the-anadimukta-identity">What Is the Anadimukta Identity?</a></div></details><details class="site-mobile-nav__group"><summary>Find Yourself</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/" data-destination="/find-yourself">Overview</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/discover-your-individuality/" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/who-are-you-becoming/" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/what-is-happening-inside-you/" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/you-have-a-role-to-play/" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/find-yourself/nij-darshan/" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></details><details class="site-mobile-nav__group"><summary>Practice</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/" data-destination="/practice">Overview</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/how-to-practice/" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/meditation-dhyan/" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/prayer/" data-destination="/practice/prayer">Prayer</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/puja/" data-destination="/practice/puja">Puja</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/mansipuja/" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/aarti/" data-destination="/practice/aarti">Aarti</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/mala/" data-destination="/practice/mala">Mala</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/darshan/" data-destination="/practice/darshan">Darshan</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/practice/thaal/" data-destination="/practice/thaal">Thaal</a></div></details><details class="site-mobile-nav__group"><summary>Guidance</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/" data-destination="/guidance">Overview</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/why-a-satpurush/" data-destination="/guidance/why-a-satpurush">Why a Satpurush?</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/how-to-learn-from-a-satpurush/" data-destination="/guidance/how-to-learn-from-a-satpurush">How to Learn from a Satpurush</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/meet-guruji/" data-destination="/guidance/meet-guruji">Meet Guruji</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/our-parampara/" data-destination="/guidance/our-parampara">Our Parampara</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/how-to-be-a-good-mentee/" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/guidance/get-guidance/" data-destination="/guidance/get-guidance">Get Guidance</a></div></details><a class="site-mobile-nav__single" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/community/" data-destination="/community">Community</a><details class="site-mobile-nav__group site-mobile-nav__group--more"><summary>More</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/anadi-way/" data-destination="/anadi-way">The Anadi Way</a><a class="site-mobile-nav__child" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/resources/" data-destination="/resources">Resources</a></div></details></nav></header>
   <main>
     <section class="home-hero">
       <div class="wrap home-hero__inner">
@@ -1152,9 +1190,9 @@ a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-sh
 
     <section class="home-statement"><div class="wrap home-statement__inner"><div class="section-eyebrow">Karan Satsang</div><h2>A journey from knowledge to experience.</h2><p>Karan Satsang asks us to understand ourselves, understand God, and gradually allow that understanding to change the way we live and experience life. That can involve asking deeper questions, examining ourselves honestly, developing spiritual practices, learning from the experienced ones, and growing alongside others. The goal is not simply to know more about spirituality. It is to become different through it.</p><div class="home-statement__action"><a class="cta cta--text" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/gnan/" data-destination="/gnan">Explore the Karan Philosophy →</a></div></div></section>
 
-    <section class="home-showcase" id="whats-new"><div class="wrap"><div class="home-showcase__head"><div class="section-eyebrow">Explore</div><h2>What&#039;s new</h2><p>New experiences, ideas, articles, music, and other things worth spending some time with.</p></div><div class="showcase-grid"><a class="showcase-card showcase-card--lead showcase-card--has-image" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/experiences/alone-together/" data-destination="/experiences/alone-together"><div class="showcase-card__media"><img src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/AT-HomePage.png" alt="Promotional artwork for Alone Together" loading="lazy" style="object-position:center"></div><div class="showcase-card__shade" aria-hidden="true"></div><div class="showcase-card__content"><div class="showcase-card__type">Limited-time experience</div><div class="showcase-card__meta">Oct 26–31, 2026 · Virtual Experience</div><h3>Alone Together</h3><p>A 6-day virtual experience to help address the loneliness epidemic with discussions on how spirituality and a change in perspective can make us feel more connected. Three live sessions, plus challenges you can do any time.</p><span class="showcase-card__link">Join the Experience →</span></div></a><a class="showcase-card showcase-card--fallback showcase-card--pattern-2" href="https://medium.com/@AnadiYouthSMVS/whats-his-secret-e1f759ed10aa" target="_top" rel="noopener noreferrer"><div class="showcase-card__media showcase-card__media--pattern" aria-hidden="true"><span></span></div><div class="showcase-card__content"><div class="showcase-card__type">Read</div><h3>What&#039;s His Secret?</h3><p>Guruji’s 15-day solitudes as the leader of an international organization</p><span class="showcase-card__link">Read on Medium ↗</span></div></a><a class="showcase-card showcase-card--fallback showcase-card--pattern-3" href="https://open.spotify.com/album/1Xm9BJv9ZRqHkVpublMpdq" target="_top" rel="noopener noreferrer"><div class="showcase-card__media showcase-card__media--pattern" aria-hidden="true"><span></span></div><div class="showcase-card__content"><div class="showcase-card__type">Listen</div><h3>Featured ‘Alone Together’ album</h3><p>Hear what it feels like to be together, yet alone, and alone, yet together.</p><span class="showcase-card__link">Listen on Spotify ↗</span></div></a></div></div></section>
+    <section class="home-showcase" id="whats-new"><div class="wrap"><div class="home-showcase__head"><div class="section-eyebrow">Explore</div><h2>What&#039;s new</h2><p>New experiences, ideas, articles, music, and other things worth spending some time with.</p></div><div class="showcase-grid"><a class="showcase-card showcase-card--lead showcase-card--has-image" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/experiences/alone-together/" data-destination="/experiences/alone-together"><div class="showcase-card__media"><img src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/AT-HomePage.png" alt="Promotional artwork for Alone Together" loading="lazy" style="object-position:center"></div><div class="showcase-card__shade" aria-hidden="true"></div><div class="showcase-card__content"><div class="showcase-card__type">Limited-time experience</div><div class="showcase-card__meta">Oct 26–31, 2026 · Virtual Experience</div><h3>Alone Together</h3><p>A 6-day virtual experience to help address the loneliness epidemic with discussions on how spirituality and a change in perspective can make us feel more connected. Three live sessions, plus challenges you can do any time.</p><span class="showcase-card__link">Join the Experience →</span></div></a><a class="showcase-card showcase-card--fallback showcase-card--pattern-2" href="https://medium.com/@AnadiYouthSMVS/whats-his-secret-e1f759ed10aa" target="_blank" rel="noopener noreferrer"><div class="showcase-card__media showcase-card__media--pattern" aria-hidden="true"><span></span></div><div class="showcase-card__content"><div class="showcase-card__type">Read</div><h3>What&#039;s His Secret?</h3><p>Guruji’s 15-day solitudes as the leader of an international organization</p><span class="showcase-card__link">Read on Medium ↗</span></div></a><a class="showcase-card showcase-card--fallback showcase-card--pattern-3" href="https://open.spotify.com/album/1Xm9BJv9ZRqHkVpublMpdq" target="_blank" rel="noopener noreferrer"><div class="showcase-card__media showcase-card__media--pattern" aria-hidden="true"><span></span></div><div class="showcase-card__content"><div class="showcase-card__type">Listen</div><h3>Featured ‘Alone Together’ album</h3><p>Hear what it feels like to be together, yet alone, and alone, yet together.</p><span class="showcase-card__link">Listen on Spotify ↗</span></div></a></div></div></section>
 
-    <section class="home-callout home-callout--gold"><div class="wrap home-callout__inner"><div class="home-callout__copy"><div class="section-eyebrow">Stay connected</div><h2>Spiritual growth is personal. It does not have to be isolated.</h2><p>Stay connected with Anadi Youth for Sabha, new content, conversations, and opportunities to grow alongside others.</p></div><div class="home-callout__actions"><a class="cta cta--primary" href="https://chat.whatsapp.com/IdotjqOrwb369o4aRHPUAs" target="_top" rel="noopener noreferrer">Join the WhatsApp Community ↗</a><a class="cta cta--text" href="https://www.reddit.com/r/KaranPhilosophies/" target="_top" rel="noopener noreferrer">Join the conversation on Reddit ↗</a></div></div></section>
+    <section class="home-callout home-callout--gold"><div class="wrap home-callout__inner"><div class="home-callout__copy"><div class="section-eyebrow">Stay connected</div><h2>Spiritual growth is personal. It does not have to be isolated.</h2><p>Stay connected with Anadi Youth for Sabha, new content, conversations, and opportunities to grow alongside others.</p></div><div class="home-callout__actions"><a class="cta cta--primary" href="https://chat.whatsapp.com/IdotjqOrwb369o4aRHPUAs" target="_blank" rel="noopener noreferrer">Join the WhatsApp Community ↗</a><a class="cta cta--text" href="https://www.reddit.com/r/KaranPhilosophies/" target="_blank" rel="noopener noreferrer">Join the conversation on Reddit ↗</a></div></div></section>
 
     <section class="home-about"><div class="wrap home-about__inner"><div class="section-eyebrow">About Anadi Youth</div><h2>Make space for something deeper.</h2><p>Anadi Youth creates space for thoughtful questions, honest reflection, meaningful relationships, spiritual understanding, and practices that can gradually change the way we experience life. Our mission is to help you become the ideal you, day by day, via Karan Satsang.</p></div></section>
 
@@ -1227,6 +1265,67 @@ a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-sh
       }
     });
   }
+  // Desktop navigation also appears on landscape tablets. A main hub link
+  // remains navigable for mouse users, but the first touch/pen tap expands its
+  // submenu instead. A second tap navigates; "Overview" always navigates.
+  const desktopHubMenus = [...document.querySelectorAll('[data-site-subnav]')];
+  const setDesktopHubOpen = (menu, open) => {
+    menu.classList.toggle('is-dropdown-open', open);
+    const trigger = menu.querySelector('[data-site-subnav-trigger]');
+    if (trigger) {
+      trigger.setAttribute('aria-expanded', String(open));
+      const title = menu.querySelector('[data-site-hub-link]')?.textContent || 'this section';
+      trigger.setAttribute('aria-label', (open ? 'Hide' : 'Show') + ' ' + title.trim() + ' pages');
+    }
+  };
+  const closeDesktopHubMenus = (except = null) => {
+    desktopHubMenus.forEach((menu) => {
+      if (menu !== except) setDesktopHubOpen(menu, false);
+    });
+  };
+  desktopHubMenus.forEach((menu) => {
+    const hubLink = menu.querySelector('[data-site-hub-link]');
+    const trigger = menu.querySelector('[data-site-subnav-trigger]');
+    if (!hubLink || !trigger) return;
+    let lastPointerType = '';
+    menu.addEventListener('pointerdown', (event) => { lastPointerType = event.pointerType || ''; });
+    menu.addEventListener('keydown', () => { lastPointerType = 'keyboard'; });
+    hubLink.addEventListener('click', (event) => {
+      const touchLike = lastPointerType === 'touch' || lastPointerType === 'pen' ||
+        (event.detail > 0 && matchMedia('(hover:none)').matches);
+      if (touchLike && !menu.classList.contains('is-dropdown-open')) {
+        event.preventDefault();
+        closeDesktopHubMenus(menu);
+        setDesktopHubOpen(menu, true);
+        if (siteMoreMenu) siteMoreMenu.open = false;
+      }
+      lastPointerType = '';
+    });
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      const next = !menu.classList.contains('is-dropdown-open');
+      closeDesktopHubMenus(menu);
+      setDesktopHubOpen(menu, next);
+      if (next && siteMoreMenu) siteMoreMenu.open = false;
+    });
+    // Focus can move into the dropdown without collapsing it.
+    menu.addEventListener('focusout', (event) => {
+      if (!menu.contains(event.relatedTarget)) setDesktopHubOpen(menu, false);
+    });
+  });
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('[data-site-subnav]')) closeDesktopHubMenus();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const opened = desktopHubMenus.find((menu) => menu.classList.contains('is-dropdown-open'));
+    if (!opened) return;
+    event.preventDefault();
+    closeDesktopHubMenus();
+    opened.querySelector('[data-site-subnav-trigger]')?.focus();
+  });
+  addEventListener('resize', () => { if (innerWidth <= 1040) closeDesktopHubMenus(); });
+
   const siteMenuToggle = document.getElementById("siteMenuToggle");
   const siteMobileNav = document.getElementById("siteMobileNav");
   if (siteHeader && siteMenuToggle && siteMobileNav) {
