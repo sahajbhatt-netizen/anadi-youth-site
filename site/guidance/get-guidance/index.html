@@ -105,37 +105,74 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 
 .page-grid {
   display: grid;
-  grid-template-columns: 220px minmax(0,1fr);
-  gap: 68px;
+  grid-template-columns: minmax(0,1fr);
   padding: 66px 0 104px;
   align-items: start;
 }
-.toc { position: sticky; top: 26px; }
-.toc__label { font-family: Fraunces, Georgia, serif; font-size: 18px; color: var(--ink); margin-bottom: 15px; }
+.page-grid--with-toc { grid-template-columns: minmax(0,1fr) 224px; gap: 60px; }
+.toc { position: sticky; top: 102px; min-width:0; }
+.toc__label { font-family: Fraunces, Georgia, serif; font-size: 18px; color: var(--ink); margin-bottom: 12px; }
 .toc__rule { width: 32px; height: 2px; background: var(--gold); margin-bottom: 15px; }
-.toc a {
+.toc__nav {
+  max-height: calc(100vh - 178px);
+  max-height: calc(100dvh - 178px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #d6d1c5 transparent;
+  padding: 2px 5px 8px 0;
+}
+.toc__group { margin-bottom: 3px; }
+.toc__heading-row { display:flex; align-items:flex-start; min-width:0; }
+.toc__link {
   position: relative;
   display: block;
-  padding: 7px 0 7px 16px;
+  padding: 8px 6px 8px 12px;
   color: #77756e;
   text-decoration: none;
-  font-size: 14px;
-  line-height: 1.35;
-  border-left: 1px solid #d8d4c9;
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
   transition: color .15s ease;
 }
-.toc a.active { color: var(--indigo); font-weight: 600; }
-.toc a.active::before { content:""; position:absolute; left:-2px; top:8px; width:3px; height:18px; background:var(--gold); border-radius:4px; }
+.toc__major { flex:1; min-width:0; border-left:1px solid #d8d4c9; }
+.toc__child { border-left:1px solid #d8d4c9; padding-left:13px; font-size:12px; }
+.toc__link.active { color:var(--indigo); font-weight:600; }
+.toc__link.active::before { content:""; position:absolute; left:-2px; top:7px; width:3px; height:calc(100% - 14px); min-height:14px; background:var(--gold); border-radius:4px; }
+.toc__group--active > .toc__heading-row .toc__major { color:var(--indigo); }
+.toc__toggle {
+  flex:0 0 28px;
+  width:28px;
+  height:34px;
+  padding:0;
+  border:0;
+  border-radius:6px;
+  background:transparent;
+  color:#888379;
+  font:inherit;
+  font-size:17px;
+  cursor:pointer;
+}
+.toc__toggle span { display:inline-block; transition:transform .16s ease; }
+.toc__toggle[aria-expanded="true"] span { transform:rotate(180deg); }
+.toc__toggle:hover { background:rgba(53,64,122,.055); color:var(--indigo); }
+.toc__toggle:focus-visible { outline:2px solid rgba(53,64,122,.42); outline-offset:2px; }
+.toc__children { padding-left:11px; margin:0 0 8px 7px; }
+.toc__children[hidden] { display:none !important; }
+/* Long titles retain full text in the DOM and native title tooltip. */
+.toc__link { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden; }
 .mobile-toc { display:none; margin-bottom:48px; }
 .mobile-toc details { border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
 .mobile-toc summary { padding:14px 0; color:var(--indigo); font-weight:600; font-size:14px; cursor:pointer; list-style:none; }
 .mobile-toc summary::-webkit-details-marker { display:none; }
-.mobile-toc nav { display:grid; gap:7px; padding:0 0 16px; }
-.mobile-toc a { text-decoration:none; color:var(--muted); font-size:14px; }
+.mobile-toc .toc__nav { max-height:min(56vh,460px); max-height:min(56dvh,460px); padding:0 0 18px; }
+.mobile-toc .toc__link { font-size:14px; }
+.mobile-toc .toc__child { font-size:13px; }
 
 .content { min-width:0; }
 .transition-note { max-width:var(--measure); margin:0 0 72px; font-size:15px; font-weight:600; line-height:1.5; color:var(--muted); }
-.chapter { scroll-margin-top:28px; margin-bottom:104px; }
+.chapter { scroll-margin-top:108px; margin-bottom:104px; }
 .chapter--major { padding-top: 8px; }
 .chapter--major::before { content:""; display:block; width:42px; height:1px; background:var(--gold-soft); margin-bottom:28px; }
 .chapter__index { color:var(--gold); font-size:13px; font-weight:600; letter-spacing:.04em; margin-bottom:10px; }
@@ -225,10 +262,14 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 .closing__links { display:flex; flex-wrap:wrap; gap:12px 26px; margin-top:25px; }
 .closing a { color:#e7c476; font-weight:600; text-decoration:none; border-bottom:1px solid rgba(231,196,118,.45); }
 
-@media (max-width:900px) {
-  .page-grid { grid-template-columns:1fr; gap:0; padding-top:42px; }
+@media (max-width:1040px) {
+  /* Align the TOC switch with the site's narrow-screen navigation switch. */
+  .page-grid--with-toc { grid-template-columns:minmax(0,1fr); gap:0; }
   .toc { display:none; }
   .mobile-toc { display:block; }
+}
+@media (max-width:900px) {
+  .page-grid { padding-top:42px; }
 }
 @media (max-width:640px) {
   body { font-size:16px; line-height:1.72; }
@@ -1059,7 +1100,7 @@ a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-sh
   .site-footer__copyright { flex: initial; }
 }
 </style>
-  <meta name="anadi-published-at" content="2026-10-11T09:25:24.309Z">
+  <meta name="anadi-published-at" content="2026-10-11T11:06:28.834Z">
 </head>
 <body class="template--journal family--guidance">
   <header class="site-header" id="siteHeader"><div class="wrap site-header__bar"><a class="site-brand" data-destination="/" href="#" aria-label="Anadi Youth home"><img class="site-brand__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-mark.svg" alt="" aria-hidden="true"><span class="site-brand__name">Anadi Youth</span></a><nav class="site-nav" aria-label="Primary navigation"><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="#" data-destination="/gnan">Gnan &amp; Philosophy</a><button class="site-nav__caret" type="button" aria-label="Show Gnan &amp; Philosophy pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/gnan">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/gnan/who-am-i">Who Am I?</a><a class="site-nav__dropdown-link" href="#" data-destination="/gnan/why-am-i">Why Am I?</a><a class="site-nav__dropdown-link" href="#" data-destination="/gnan/how-can-we-know-god">How Can We Know God?</a><a class="site-nav__dropdown-link" href="#" data-destination="/gnan/who-is-god">Who Is God?</a><a class="site-nav__dropdown-link" href="#" data-destination="/gnan/what-does-it-mean-to-attain-god">What Does It Mean to Attain God?</a><a class="site-nav__dropdown-link" href="#" data-destination="/gnan/how-can-i-experience-god">How Can I Experience God?</a><a class="site-nav__dropdown-link" href="#" data-destination="/gnan/what-is-the-anadimukta-identity">What Is the Anadimukta Identity?</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="#" data-destination="/find-yourself">Find Yourself</a><button class="site-nav__caret" type="button" aria-label="Show Find Yourself pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/find-yourself">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-nav__dropdown-link" href="#" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link" href="#" data-destination="/practice">Practice</a><button class="site-nav__caret" type="button" aria-label="Show Practice pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/practice">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/prayer">Prayer</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/puja">Puja</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/aarti">Aarti</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/mala">Mala</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/darshan">Darshan</a><a class="site-nav__dropdown-link" href="#" data-destination="/practice/thaal">Thaal</a></div></div><div class="site-nav__item site-nav__item--has-children"><a class="site-nav__link site-nav__link--active" href="#" data-destination="/guidance">Guidance</a><button class="site-nav__caret" type="button" aria-label="Show Guidance pages" tabindex="-1">⌄</button><div class="site-nav__dropdown"><a class="site-nav__dropdown-link site-nav__dropdown-link--overview" href="#" data-destination="/guidance">Overview</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/why-a-satpurush">Why a Satpurush?</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/how-to-learn-from-a-satpurush">How to Learn from a Satpurush</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/meet-guruji">Meet Guruji</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/our-parampara">Our Parampara</a><a class="site-nav__dropdown-link" href="#" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee</a><a class="site-nav__dropdown-link site-nav__dropdown-link--active" href="#" data-destination="/guidance/get-guidance">Get Guidance</a></div></div><div class="site-nav__item"><a class="site-nav__link" href="#" data-destination="/community">Community</a></div><details class="site-nav__item site-nav__item--more" id="siteMoreMenu"><summary class="site-nav__link site-nav__more-trigger">More<svg class="site-nav__more-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4L6 8L10 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="site-nav__dropdown site-nav__dropdown--more"><a class="site-nav__dropdown-link" href="#" data-destination="/anadi-way">The Anadi Way</a><a class="site-nav__dropdown-link" href="#" data-destination="/resources">Resources</a></div></details></nav><button class="site-menu-toggle" id="siteMenuToggle" type="button" aria-controls="siteMobileNav" aria-expanded="false"><span class="site-menu-toggle__label">Menu</span><span class="site-menu-toggle__icon" aria-hidden="true"><i></i><i></i></span></button></div><nav class="site-mobile-nav" id="siteMobileNav" aria-label="Mobile navigation"><details class="site-mobile-nav__group"><summary>Gnan &amp; Philosophy</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/gnan">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/gnan/who-am-i">Who Am I?</a><a class="site-mobile-nav__child" href="#" data-destination="/gnan/why-am-i">Why Am I?</a><a class="site-mobile-nav__child" href="#" data-destination="/gnan/how-can-we-know-god">How Can We Know God?</a><a class="site-mobile-nav__child" href="#" data-destination="/gnan/who-is-god">Who Is God?</a><a class="site-mobile-nav__child" href="#" data-destination="/gnan/what-does-it-mean-to-attain-god">What Does It Mean to Attain God?</a><a class="site-mobile-nav__child" href="#" data-destination="/gnan/how-can-i-experience-god">How Can I Experience God?</a><a class="site-mobile-nav__child" href="#" data-destination="/gnan/what-is-the-anadimukta-identity">What Is the Anadimukta Identity?</a></div></details><details class="site-mobile-nav__group"><summary>Find Yourself</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/find-yourself">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/discover-your-individuality">Discover Your Individuality</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/who-are-you-becoming">Who Are You Becoming?</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/what-is-happening-inside-you">What Is Happening Inside You?</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/you-have-a-role-to-play">You Have a Role to Play</a><a class="site-mobile-nav__child" href="#" data-destination="/find-yourself/nij-darshan">Nij-Darshan</a></div></details><details class="site-mobile-nav__group"><summary>Practice</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/practice">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/how-to-practice">How to Practice</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/meditation-dhyan">Meditation &amp; Dhyan</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/prayer">Prayer</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/puja">Puja</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/mansipuja">Mansipuja</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/aarti">Aarti</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/mala">Mala</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/darshan">Darshan</a><a class="site-mobile-nav__child" href="#" data-destination="/practice/thaal">Thaal</a></div></details><details class="site-mobile-nav__group" open><summary>Guidance</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child site-mobile-nav__child--overview" href="#" data-destination="/guidance">Overview</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/why-a-satpurush">Why a Satpurush?</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/how-to-learn-from-a-satpurush">How to Learn from a Satpurush</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/meet-guruji">Meet Guruji</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/our-parampara">Our Parampara</a><a class="site-mobile-nav__child" href="#" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee</a><a class="site-mobile-nav__child site-mobile-nav__child--active" href="#" data-destination="/guidance/get-guidance">Get Guidance</a></div></details><a class="site-mobile-nav__single" href="#" data-destination="/community">Community</a><details class="site-mobile-nav__group site-mobile-nav__group--more"><summary>More</summary><div class="site-mobile-nav__children"><a class="site-mobile-nav__child" href="#" data-destination="/anadi-way">The Anadi Way</a><a class="site-mobile-nav__child" href="#" data-destination="/resources">Resources</a></div></details></nav></header>
@@ -1075,15 +1116,15 @@ a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-sh
       
     </div>
   </header>
-  <div class="wrap page-grid">
-    <aside class="toc" aria-label="On this page"><div class="toc__label">On this page</div><div class="toc__rule"></div><nav><a href="#you-do-not-have-to-figure-everything-out-first">You do not have to figure everything out first.</a><a href="#start-with-one-conversation">Start with one conversation.</a></nav></aside>
+  <div class="wrap page-grid page-grid--no-toc">
     <main class="content">
-      <div class="mobile-toc"><details><summary>On this page</summary><nav><a href="#you-do-not-have-to-figure-everything-out-first">You do not have to figure everything out first.</a><a href="#start-with-one-conversation">Start with one conversation.</a></nav></details></div>
+      
       
       <section class="chapter chapter--major" id="you-do-not-have-to-figure-everything-out-first"><h2 class="chapter__title chapter__title--h1">You do not have to figure everything out first.</h2><div class="prose"><p>It can be tempting to wait until you can explain the problem perfectly.</p><p>You may think you need to understand exactly what is wrong, organize the whole story, or know what you want to ask before speaking to someone. But sometimes the reason you need guidance is precisely because you cannot yet make sense of what is happening.</p><p>You can begin there.</p></div><div class="prose"><p><em>I don&#039;t know why this keeps affecting me.I have two options and I cannot tell what I should prioritize.Things at home have been difficult and I do not know how to handle it.I feel disconnected from Satsang.I understand what I should be doing spiritually, but I am struggling to actually do it.</em></p><p>A good conversation can help turn something vague into something you can begin to understand and work with.</p><p>When you reach out, share enough context for the person speaking with you to understand the situation. You do not need to tell your entire life story, and you do not need to make yourself more vulnerable than you are ready to be. Start with what feels relevant and honest.</p><p>Depending on what you need, the right person may be an experienced devotee, mentor, or Pujya Sant. Different people can help with different kinds of questions, and sometimes the first conversation helps clarify what kind of guidance would be most useful next.</p><p>You do not have to work that out alone before beginning.</p></div></section>
 <section class="chapter chapter--major chapter--gold" id="start-with-one-conversation"><h2 class="chapter__title chapter__title--h1">Start with one conversation.</h2><div class="prose"><p>Getting guidance does not mean committing yourself to a formal mentoring relationship.</p><p>Start with one conversation.</p><p>Bring the real situation as best as you can. Ask the question you are actually struggling with. Be willing to hear a perspective that may be different from your own.</p><p>Then see what becomes clearer.</p><p>Sometimes one conversation is enough to help you move forward. Sometimes it reveals that there is something worth continuing to work through. You may decide to speak again, connect with someone who has more relevant experience, or take something from the conversation into your own life and see what happens.</p><p>If you receive something useful, try it. Pay attention to what you learn. If you need more guidance afterward, come back with that new experience.</p><p>Guidance becomes most useful when the conversation becomes part of what you do next.</p></div><div class="prose"><p>If you want to prepare before reaching out, <strong>How to Be a Good Mentee</strong> explores how to share honestly, receive feedback, try what you learn, and get more from the guidance available to you.</p></div><div class="cta-row"><a class="cta cta--primary" href="#" data-destination="/guidance/how-to-be-a-good-mentee">How to Be a Good Mentee →</a></div><div class="cta-row"><a class="cta cta--text" href="#" data-destination="/guidance">Return to Guidance →</a></div></section>
       
     </main>
+    
   </div>
   <footer class="site-footer"><div class="wrap site-footer__inner"><div class="site-footer__brand"><a class="site-footer__brand-link" data-destination="/" href="#" aria-label="Anadi Youth home"><img class="site-footer__logo" src="https://sahajbhatt-netizen.github.io/anadi-youth-site/assets/anadi-youth-logo.svg" alt="Anadi Youth SMVS"></a><p class="site-footer__tagline">Becoming the ideal you, day by day, via Karan Satsang.</p></div><div class="site-footer__menus"><div class="site-footer__group"><div class="site-footer__heading">Explore</div><nav class="site-footer__nav" aria-label="Footer navigation"><a class="site-footer__link" href="#" data-destination="/gnan">Gnan &amp; Philosophy</a><a class="site-footer__link" href="#" data-destination="/find-yourself">Find Yourself</a><a class="site-footer__link" href="#" data-destination="/practice">Practice</a><a class="site-footer__link site-footer__link--active" href="#" data-destination="/guidance">Guidance</a><a class="site-footer__link" href="#" data-destination="/community">Community</a></nav><div class="site-footer__more"><div class="site-footer__heading">More</div><nav class="site-footer__nav" aria-label="More navigation"><a class="site-footer__link" href="#" data-destination="/anadi-way">The Anadi Way</a><a class="site-footer__link" href="#" data-destination="/resources">Resources</a></nav></div></div><div class="site-footer__group"><div class="site-footer__heading">Follow</div><div class="site-footer__socials"><a class="site-footer__social" href="https://www.instagram.com/anadiyouthsmvs/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://youtube.com/@anadiyouthsmvs" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://medium.com/@AnadiYouthSMVS" target="_blank" rel="noopener noreferrer">Medium <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://www.reddit.com/r/KaranPhilosophies/" target="_blank" rel="noopener noreferrer">Reddit <span aria-hidden="true">↗</span></a><a class="site-footer__social" href="https://open.spotify.com/artist/1akCDpi5dit6LDw5O64tyl" target="_blank" rel="noopener noreferrer">Spotify <span aria-hidden="true">↗</span></a></div></div></div></div><div class="wrap site-footer__bottom"><div class="site-footer__legal"><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/terms-conditions/">Terms &amp; Conditions</a><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/privacy-policy/">Privacy Policy</a><a class="site-footer__legal-link" href="https://sahajbhatt-netizen.github.io/anadi-youth-site/disclaimer/">Disclaimer</a></div><div class="site-footer__copyright">© 2026 Anadi Youth SMVS. All rights reserved.</div></div></footer>
   <script>(() => {
@@ -1180,23 +1221,113 @@ a.showcase-card:hover { transform:translateY(-3px); border-color:#c9c1af; box-sh
   addEventListener("resize", updateProgress);
   updateProgress();
 
-  const tocLinks = [...document.querySelectorAll(".toc a")];
-  const sections = tocLinks
-    .map((a) => document.querySelector(a.getAttribute("href")))
-    .filter(Boolean);
+  // Contextual TOC: H1 sections are always listed; only the current H1's
+  // H2 subsections auto-expand. Manual toggles work independently on each
+  // desktop/mobile TOC and can be overridden again by the visitor.
+  const tocNavs = [...document.querySelectorAll('[data-toc-nav]')];
+  if (tocNavs.length) {
+    const contentSections = [...document.querySelectorAll('.content > .chapter[id]')];
+    const sectionLinks = [...document.querySelectorAll('.toc__link[data-toc-id]')];
+    const sectionToGroup = new Map();
+    sectionLinks.forEach((link) => {
+      if (!sectionToGroup.has(link.dataset.tocId)) {
+        sectionToGroup.set(link.dataset.tocId, link.dataset.tocParent);
+      }
+    });
 
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-      if (!visible) return;
-      tocLinks.forEach((a) => {
-        a.classList.toggle("active", a.getAttribute("href") === "#" + visible.target.id);
+    const overrides = new WeakMap();
+    tocNavs.forEach((nav) => {
+      const overridesForNav = new Map();
+      overrides.set(nav, overridesForNav);
+      nav.querySelectorAll('.toc__group').forEach((group) => {
+        const button = group.querySelector('[data-toc-toggle]');
+        if (!button) return;
+        button.addEventListener('click', () => {
+          const children = group.querySelector('.toc__children');
+          const currentlyOpen = Boolean(children && !children.hidden);
+          overridesForNav.set(group.dataset.tocGroup, !currentlyOpen);
+          updateTocState(activeTocId);
+        });
       });
-    }, { rootMargin: "-15% 0px -70% 0px", threshold: 0 });
-    sections.forEach((section) => observer.observe(section));
+    });
+
+    let activeTocId = contentSections[0]?.id || '';
+    let activeGroupId = sectionToGroup.get(activeTocId) || '';
+    function keepTocLinkVisible(nav, link) {
+      if (!link || !nav || !nav.getClientRects().length) return;
+      const mobileDetails = nav.closest('.mobile-toc details');
+      if (mobileDetails && !mobileDetails.open) return;
+      const bounds = nav.getBoundingClientRect();
+      const entry = link.getBoundingClientRect();
+      if (entry.top < bounds.top + 10) nav.scrollTop -= bounds.top + 10 - entry.top;
+      else if (entry.bottom > bounds.bottom - 10) nav.scrollTop += entry.bottom - bounds.bottom + 10;
+    }
+    function updateTocState(nextId) {
+      if (!nextId) return;
+      const nextGroup = sectionToGroup.get(nextId) || '';
+      // When the active H1 changes, its new subsections auto-open again, even
+      // if that group was manually collapsed on a previous visit.
+      if (nextGroup !== activeGroupId) {
+        tocNavs.forEach((nav) => overrides.get(nav).delete(nextGroup));
+        activeGroupId = nextGroup;
+      }
+      activeTocId = nextId;
+      tocNavs.forEach((nav) => {
+        nav.querySelectorAll('.toc__group').forEach((group) => {
+          const groupId = group.dataset.tocGroup;
+          const child = group.querySelector('.toc__children');
+          const button = group.querySelector('[data-toc-toggle]');
+          const choice = overrides.get(nav).get(groupId);
+          const expanded = choice === undefined ? groupId === nextGroup : choice;
+          group.classList.toggle('toc__group--active', groupId === nextGroup);
+          if (child) child.hidden = !expanded;
+          if (button) {
+            button.setAttribute('aria-expanded', String(expanded));
+            button.setAttribute('aria-label',
+              (expanded ? 'Hide' : 'Show') + ' subsections of ' +
+              (group.querySelector('.toc__major')?.textContent || 'this section'));
+          }
+        });
+        nav.querySelectorAll('.toc__link[data-toc-id]').forEach((link) => {
+          const active = link.dataset.tocId === nextId;
+          link.classList.toggle('active', active);
+          if (active) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+        keepTocLinkVisible(nav, nav.querySelector('.toc__link.active'));
+      });
+    }
+
+    function findCurrentSectionId() {
+      if (!contentSections.length) return '';
+      const headerHeight = document.getElementById('siteHeader')?.getBoundingClientRect().height || 0;
+      const marker = headerHeight + Math.min(115, innerHeight * .17);
+      let current = contentSections[0].id;
+      for (const section of contentSections) {
+        if (section.getBoundingClientRect().top > marker) break;
+        current = section.id;
+      }
+      return current;
+    }
+    let tocTicking = false;
+    function updateTocOnScroll() {
+      if (tocTicking) return;
+      tocTicking = true;
+      requestAnimationFrame(() => {
+        tocTicking = false;
+        const id = findCurrentSectionId();
+        if (id !== activeTocId) updateTocState(id);
+      });
+    }
+    updateTocState(activeTocId);
+    addEventListener('scroll', updateTocOnScroll, { passive:true });
+    addEventListener('resize', updateTocOnScroll);
+    // Keep mobile details in sync with any headings that changed while closed.
+    document.querySelectorAll('.mobile-toc details').forEach((details) => {
+      details.addEventListener('toggle', () => { if (details.open) updateTocState(activeTocId); });
+    });
   }
+
 })();
 </script>
 </body>
