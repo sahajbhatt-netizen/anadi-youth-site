@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# Staging pages have noindex meta tags.
