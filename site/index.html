@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Anadi Youth · Anadi Youth</title>
   <meta name="description" content="Explore yourself. Ask deeper questions. Understand God. And discover how spiritual wisdom can become something you actually live and experience." />
-  <meta name="anadi-source-revision" content="sha256:3c55e9a2226a932b0ce2963d7e652d43b22f88118dcaee14bc703c0c92b5f675">
+  <meta name="anadi-source-revision" content="sha256:39737dceb41061cf0ef054bcc4ffdab197081030538b9c256b671cace5bd6ce2">
   <meta name="anadi-source-tab" content="t.fhpgv65dsnne">
-  <meta name="anadi-published-at" content="2026-10-11T08:37:58.845Z">
+  <meta name="anadi-published-at" content="2026-10-11T09:23:15.358Z">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -147,8 +147,20 @@ h1 { max-width: 920px; font-size: clamp(50px, 7.7vw, 96px); line-height: .99; }
 .prose p { margin:21px 0 0; }
 .prose p + p { margin-top:18px; }
 .prose .note { font-size:14px; color:#776f60; }
+/* Docs-authored inline emphasis. Component headings and labels remain renderer-owned. */
+.prose strong, .hero__lede strong, .pause strong, .try strong,
+.journal-prompt strong, .quote strong, .deep-inline strong, .closing strong,
+.journey__item strong, .directory-item strong { font-weight:600; }
+.prose em, .hero__lede em, .pause em, .try em, .journal-prompt em,
+.quote em, .deep-inline em, .closing em, .journey__item em,
+.directory-item em { font-style:italic; }
+.prose u, .hero__lede u, .pause u, .try u, .journal-prompt u,
+.quote u, .deep-inline u, .closing u, .journey__item u,
+.directory-item u { text-decoration-line:underline; text-decoration-thickness:from-font; text-underline-offset:.15em; }
 .text-link { display:inline-block; font-weight:600; text-decoration:none; border-bottom:1px solid rgba(53,64,122,.34); padding-bottom:2px; }
 .text-link--inline { display:inline; font-weight:500; padding-bottom:0; border-bottom-color:rgba(53,64,122,.26); }
+/* Docs hyperlinks may already have underline=true. Keep one visible link underline. */
+.text-link u { text-decoration-line:none; }
 .text-link:hover { border-bottom-color:var(--indigo); }
 
 .pause {
