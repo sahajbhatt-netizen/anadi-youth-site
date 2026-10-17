@@ -141,13 +141,13 @@
         sourceUrl: "https://www.who.int/news/item/30-06-2025-social-connection-linked-to-improved-heath-and-reduced-risk-of-early-death"
       },
 
+      /* Community points: the running total of everyone's logged points, shown under the
+         challenges. Change this number by hand, then publish the page again. */
+      communityPoints: 0,
+
       /* Individual challenge submissions contribute to the shared community total. */
       pointsLogLink: "",
-      pointsLogNote: "Submit completed challenges to add your points to the community total.",
-
-      /* Link to the shared community points dashboard when it is ready.
-         Leave blank to display a Coming Soon placeholder. */
-      communityDashboardLink: ""
+      pointsLogNote: "Submit completed challenges to add your points to the community total."
     };
     /* END OF EDIT ZONE */
   </script>
@@ -1329,56 +1329,75 @@
       text-underline-offset: 3px;
     }
 
-    .log {
+    /* community points: the running total next to how to log points */
+    .points {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px 32px;
-      padding: 24px 32px;
-      border: 2px dashed rgba(255, 255, 255, 0.55);
+      gap: 24px 56px;
+      padding: 32px 40px;
+      border: 2px solid var(--white);
       border-radius: 28px;
     }
 
-    .log__text {
+    .points__total {
+      flex: none;
+      max-width: 100%;
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
 
-    .log__text b {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      line-height: 26px;
+    .points__label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      line-height: 20px;
       text-transform: uppercase;
     }
 
-    .log__text span {
+    .points__figure {
+      font-size: clamp(56px, 9vw, 128px);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 0.95;
+      color: var(--peach);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .points__copy {
+      flex: 1 1 360px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .points__title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .points__text {
+      max-width: 560px;
+      font-size: 16px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.82);
+      text-wrap: pretty;
+    }
+
+    .points__note {
       font-size: 14px;
       line-height: 1.5;
       color: rgba(255, 255, 255, 0.82);
     }
 
-    .points-actions {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .log--dashboard {
-      border-color: var(--peach);
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .log .btn {
-      flex: none;
-    }
-
-    @media (max-width: 960px) {
-      .points-actions {
-        grid-template-columns: 1fr;
-      }
+    .points__copy .btn {
+      margin-top: 6px;
     }
 
     /* ---------- follow card and follow dock ---------- */
@@ -2110,8 +2129,8 @@
         padding: 24px;
       }
 
-      .log {
-        padding: 20px 24px;
+      .points {
+        padding: 24px;
       }
 
       .btn {
@@ -2322,16 +2341,19 @@
           <h2 class="head__title"><i data-count="challenges">6</i> challenges</h2>
           <p class="head__text">Starting after Session 01, do the challenges on any day, in any order. You earn points
             by taking part, but every point goes into our <strong>shared community total</strong>. As everyone’s
-            contributions add up, we’ll unlock more together. A Community Points Dashboard will show our progress.</p>
+            contributions add up, we’ll unlock more together. The community total below shows our progress.</p>
         </div>
         <div class="bento" id="bento"></div>
-        <div class="points-actions">
-          <div class="log" id="log">
-            <div class="log__text"><b>Log your contribution</b><span id="log-note"></span></div>
+        <div class="points">
+          <div class="points__total">
+            <div class="points__label">Community points</div>
+            <div class="points__figure" id="community-points">0</div>
           </div>
-          <div class="log log--dashboard" id="community-dashboard">
-            <div class="log__text"><b>Community Points Dashboard</b><span>See how everyone’s points add up in one shared
-                total.</span></div>
+          <div class="points__copy" id="log">
+            <h3 class="points__title">Your points count for everyone</h3>
+            <p class="points__text">Each challenge you finish earns points for you. Log them, and they are also added to
+              one community total that everyone taking part builds together.</p>
+            <p class="points__note" id="log-note"></p>
           </div>
         </div>
       </div>
@@ -2695,7 +2717,9 @@
         bento.appendChild(tile);
       });
 
-      /* Challenge submissions are individual; the dashboard shows the shared community total. */
+      /* community points and the points log */
+      var communityTotal = Number(CONFIG.communityPoints) || 0;
+      document.getElementById('community-points').textContent = communityTotal.toLocaleString('en-US');
       var note = document.getElementById('log-note');
       note.textContent = CONFIG.pointsLogNote || '';
       if (!note.textContent) note.hidden = true;
@@ -2705,14 +2729,6 @@
         document.getElementById('log').appendChild(logBtn);
       } else {
         document.getElementById('log').appendChild(h('span', 'btn btn--soon', 'Log link coming soon'));
-      }
-      var dashboard = document.getElementById('community-dashboard');
-      if (CONFIG.communityDashboardLink) {
-        var dashboardBtn = out('btn btn--peach', CONFIG.communityDashboardLink);
-        dashboardBtn.textContent = 'View community total';
-        dashboard.appendChild(dashboardBtn);
-      } else {
-        dashboard.appendChild(h('span', 'btn btn--soon', 'Dashboard coming soon'));
       }
 
       /* the loneliness epidemic */
