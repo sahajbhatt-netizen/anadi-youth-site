@@ -79,12 +79,17 @@
 
       mentoring: {
         title: "Here if you want to talk.",
-        intro: "You can book a private conversation with a mentor, during the Virtual Experience or afterward.*",
+        intro: "You can book a private conversation with a mentor, during the week or after it.*",
+        blurb: "Mentorship is provided by P. Santo for men and by P. Tyagi Mukto for women. Please sign up using the link for your gender, following our traditional guidelines.",
         /* The disclaimer the asterisk points to. Shown here and under the
            "Talk to someone" card at the bottom. */
         note: "* Mentorship is not therapy and is not a substitute for professional mental health care.",
-        button: "Book a 1-on-1",
-        calendly: ""
+        /* One booking button per line. Leave url as "" until you have the link. */
+        buttonsLabel: "Book a 1-on-1",
+        links: [
+          {label: "Men", url: "https://calendar.app.google/tLkzhVGjJTFTxFYP8"},
+          {label: "Women", url: ""}
+        ]
       },
 
       /* Social accounts. These feed every follow button on the page. The Instagram
@@ -1025,9 +1030,38 @@
       line-height: 1.5;
     }
 
+    .mentoring__blurb {
+      max-width: 560px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
     .mentoring__action {
       flex: none;
       max-width: 100%;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .mentoring__label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      line-height: 18px;
+      text-transform: uppercase;
+    }
+
+    .mentoring__action .btn {
+      justify-content: space-between;
+    }
+
+    .mentoring__action .btn--soon {
+      justify-content: center;
     }
 
 
@@ -2139,6 +2173,7 @@
           <span class="pill pill--black" style="min-height:32px;padding:0 14px">1-on-1 mentorship</span>
           <h2 class="mentoring__title" id="mentoring-title">Here if you want to talk.</h2>
           <p class="mentoring__intro" id="mentoring-intro"></p>
+          <p class="mentoring__blurb" id="mentoring-blurb"></p>
           <p class="mentoring__note" data-note="mentoring">* Mentorship is not therapy and is not a substitute for
             professional mental health care.</p>
         </div>
@@ -2413,15 +2448,21 @@
       if (m.intro) intro.textContent = m.intro; else intro.hidden = true;
       [].forEach.call(document.querySelectorAll('[data-note="mentoring"]'), function (n) {if (m.note) n.textContent = m.note; else n.hidden = true;});
       if (m.title) document.getElementById('mentoring-title').textContent = m.title;
+      var mBlurb = document.getElementById('mentoring-blurb');
+      if (m.blurb) mBlurb.textContent = m.blurb; else mBlurb.hidden = true;
       var mentoringAction = document.getElementById('mentoring-action');
-      if (m.calendly) {
-        var mb = out('btn btn--black', m.calendly);
-        mb.appendChild(h('span', '', m.button || 'Book a time'));
-        mb.insertAdjacentHTML('beforeend', ARROW);
-        mentoringAction.appendChild(mb);
-      } else {
-        mentoringAction.appendChild(h('span', 'btn btn--soon', 'Link coming soon'));
-      }
+      if (m.buttonsLabel) mentoringAction.appendChild(h('div', 'mentoring__label', m.buttonsLabel));
+      (m.links || []).forEach(function (l) {
+        if (l.url) {
+          var mb = out('btn btn--black', l.url);
+          mb.appendChild(h('span', '', l.label));
+          mb.insertAdjacentHTML('beforeend', ARROW);
+          mb.setAttribute('aria-label', (m.buttonsLabel || 'Book a time') + ': ' + l.label);
+          mentoringAction.appendChild(mb);
+        } else {
+          mentoringAction.appendChild(h('span', 'btn btn--soon', l.label + ': link coming soon'));
+        }
+      });
 
       /* challenges */
       var tileLooks = ['peach tile--wide', 'white', 'indigo', 'white', 'line', 'peach tile--wide'];
