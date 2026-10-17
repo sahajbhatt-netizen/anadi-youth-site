@@ -34,7 +34,6 @@
       registerLink: "",
       registerLabel: "Register now",
       registerClosesAt: "2026-10-24T21:00:00-04:00",
-      registerNote: "Registration closes Saturday, October 24 at 9 PM ET.",
 
       /* times = shown on the session ticket. weekTimes = shown in the week strip.
          youtube = the live link. feedback = the post-session Google Form link. */
@@ -1392,14 +1391,6 @@
       padding-top: 6px;
     }
 
-    .register__note {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      line-height: 1.5;
-      color: rgba(255, 255, 255, 0.78);
-    }
-
     .register--compact {
       padding-top: 0;
     }
@@ -2122,7 +2113,6 @@
               perspective can help. Four live sessions, plus challenges you can do any time.</p>
             <div class="register" data-register>
               <div data-register-btn></div>
-              <p class="register__note" data-register-note></p>
             </div>
             <p class="hero__links">
               <a href="#sessions">See the lineup <span aria-hidden="true">↓</span></a>
@@ -2431,9 +2421,6 @@
         } else {
           slot.appendChild(h('span', 'btn btn--soon', 'Registration link coming soon'));
         }
-      });
-      [].forEach.call(document.querySelectorAll('[data-register-note]'), function (n) {
-        if (CONFIG.registerNote) n.textContent = CONFIG.registerNote; else n.hidden = true;
       });
       updateRegistration();
       setInterval(updateRegistration, 60000);
