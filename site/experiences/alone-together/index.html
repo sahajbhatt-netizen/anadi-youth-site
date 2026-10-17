@@ -27,6 +27,15 @@
          If this event page is hosted separately, use the full home URL here. */
       homeUrl: "https://sahajbhatt-netizen.github.io/anadi-youth-site",
 
+      /* Registration (Google Form). The register buttons show until registerClosesAt,
+         then disappear on their own. Leave registerLink as "" to show a
+         "coming soon" placeholder instead of a working button.
+         -04:00 is Eastern Daylight Time, which is in effect on October 24. */
+      registerLink: "",
+      registerLabel: "Register now",
+      registerClosesAt: "2026-10-24T21:00:00-04:00",
+      registerNote: "Registration closes Saturday, October 24 at 9 PM ET.",
+
       /* times = shown on the session ticket. weekTimes = shown in the week strip.
          youtube = the live link. feedback = the post-session Google Form link. */
       sessions: [
@@ -1374,6 +1383,34 @@
     }
 
     /* ---------- follow card and follow dock ---------- */
+    /* ---------- registration ---------- */
+    .register {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding-top: 6px;
+    }
+
+    .register__note {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .register--compact {
+      padding-top: 0;
+    }
+
+    .head__side {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 24px;
+    }
+
     .hero__links {
       display: flex;
       flex-wrap: wrap;
@@ -2083,6 +2120,10 @@
             </p>
             <p class="hero__desc">A 6-day Virtual Experience on loneliness, and how spirituality and a change in
               perspective can help. Four live sessions, plus challenges you can do any time.</p>
+            <div class="register" data-register>
+              <div data-register-btn></div>
+              <p class="register__note" data-register-note></p>
+            </div>
             <p class="hero__links">
               <a href="#sessions">See the lineup <span aria-hidden="true">↓</span></a>
               <a href="#sankalp">Why we put this together <span aria-hidden="true">→</span></a>
@@ -2137,7 +2178,12 @@
               </svg><span>Live on YouTube</span></a>
             <h2 class="head__title">The lineup</h2>
           </div>
-          <div class="head__meta"><span data-count="sessions">3</span> sessions</div>
+          <div class="head__side">
+            <div class="head__meta"><span data-count="sessions">3</span> sessions</div>
+            <div class="register register--compact" data-register>
+              <div data-register-btn></div>
+            </div>
+          </div>
         </div>
         <div class="tickets" id="tickets"></div>
       </div>
@@ -2366,6 +2412,31 @@
       [].forEach.call(document.querySelectorAll('[data-handle="reddit"]'), function (n) {if (rd.name) n.textContent = rd.name;});
       var player = document.getElementById('spotify-player');
       if (sp.embed) player.src = sp.embed; else player.hidden = true;
+
+      /* registration: fill the buttons, then hide them once registration closes */
+      function registrationOpen() {
+        var closes = new Date(CONFIG.registerClosesAt).getTime();
+        return isNaN(closes) || Date.now() < closes;
+      }
+      function updateRegistration() {
+        var open = registrationOpen();
+        [].forEach.call(document.querySelectorAll('[data-register]'), function (n) {n.hidden = !open;});
+      }
+      [].forEach.call(document.querySelectorAll('[data-register-btn]'), function (slot) {
+        if (CONFIG.registerLink) {
+          var rb = out('btn btn--peach btn--pop', CONFIG.registerLink);
+          rb.appendChild(h('span', '', CONFIG.registerLabel || 'Register now'));
+          rb.insertAdjacentHTML('beforeend', ARROW);
+          slot.appendChild(rb);
+        } else {
+          slot.appendChild(h('span', 'btn btn--soon', 'Registration link coming soon'));
+        }
+      });
+      [].forEach.call(document.querySelectorAll('[data-register-note]'), function (n) {
+        if (CONFIG.registerNote) n.textContent = CONFIG.registerNote; else n.hidden = true;
+      });
+      updateRegistration();
+      setInterval(updateRegistration, 60000);
 
       /* counts */
       [].forEach.call(document.querySelectorAll('[data-count="sessions"]'), function (n) {n.textContent = sessions.length;});
