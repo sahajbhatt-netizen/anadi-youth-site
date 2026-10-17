@@ -125,6 +125,14 @@
         {name: "Join the Conversation", points: 100, blurb: "Join a discussion on r/KaranPhilosophies. Leave a comment, ask a question, or answer someone else’s question."}
       ],
 
+      /* Bonus points for session feedback, shown under the challenges. One button per
+         session that has a feedback link (set on each session above). */
+      feedbackBonus: {
+        points: 35,
+        name: "Share Your Feedback",
+        blurb: "After each live session, fill out its short feedback form. Every form you submit earns 35 bonus points, and helps us make the next session better."
+      },
+
       /* "The loneliness epidemic" section near the bottom of the page. */
       why: {
         title: "The loneliness epidemic",
@@ -1329,52 +1337,155 @@
       text-underline-offset: 3px;
     }
 
-    /* community points: the running total next to how to log points */
-    .points {
+    /* bonus points tile: full width, under the challenges */
+    .tile--bonus {
+      flex: 1 1 100%;
+      border: 2px dashed var(--peach);
+      background: var(--indigo);
+      color: var(--white);
+      --tag-bg: var(--peach);
+      --tag-fg: var(--black);
+      --pts-bg: var(--peach);
+    }
+
+    .tile--bonus .tile__blurb {
+      max-width: 640px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .bonus__forms {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 24px 56px;
-      padding: 32px 40px;
-      border: 2px solid var(--white);
-      border-radius: 28px;
+      gap: 12px;
     }
 
-    .points__total {
-      flex: none;
-      max-width: 100%;
+    .bonus__forms .btn {
+      min-height: 46px;
+      padding: 0 20px;
+      font-size: 12px;
+    }
+
+    /* community points: the big shared total, the centerpiece of the section */
+    .tally {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 24px;
     }
 
-    .points__label {
+    .score {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 48px 44px 40px;
+      border-radius: 36px;
+      background: var(--peach);
+      color: var(--black);
+      box-shadow: 10px 10px 0 var(--white);
+      text-align: center;
+      --focus: var(--black);
+    }
+
+    .score__label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: var(--black);
+      color: var(--white);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.24em;
-      line-height: 20px;
       text-transform: uppercase;
     }
 
-    .points__figure {
-      font-size: clamp(56px, 9vw, 128px);
+    .score__figure {
+      max-width: 100%;
+      font-size: clamp(72px, 22vw, 240px);
       font-weight: 800;
-      letter-spacing: 0.01em;
-      line-height: 0.95;
-      color: var(--peach);
+      letter-spacing: -0.01em;
+      line-height: 0.9;
+      white-space: nowrap;
       font-variant-numeric: tabular-nums;
     }
 
-    .points__copy {
+    .score__sub {
+      font-size: clamp(14px, 1.5vw, 18px);
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      line-height: 1.4;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .score__foot {
+      align-self: stretch;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px 40px;
+      margin-top: 16px;
+      padding-top: 28px;
+      border-top: 2px dashed rgba(0, 0, 0, 0.4);
+      text-align: left;
+    }
+
+    .score__copy {
       flex: 1 1 360px;
       min-width: 0;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .points__title {
+    .score__title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .score__text {
+      max-width: 620px;
+      font-size: 16px;
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
+    .score__note {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .score__foot .btn {
+      flex: none;
+    }
+
+    /* rewards: placeholder until the rewards are announced */
+    .rewards {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px 32px;
+      padding: 28px 36px;
+      border: 2px dashed rgba(255, 255, 255, 0.6);
+      border-radius: 28px;
+    }
+
+    .rewards__copy {
+      flex: 1 1 360px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .rewards__title {
       font-size: 22px;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -1382,22 +1493,11 @@
       text-transform: uppercase;
     }
 
-    .points__text {
-      max-width: 560px;
+    .rewards__text {
+      max-width: 620px;
       font-size: 16px;
       line-height: 1.55;
       color: rgba(255, 255, 255, 0.82);
-      text-wrap: pretty;
-    }
-
-    .points__note {
-      font-size: 14px;
-      line-height: 1.5;
-      color: rgba(255, 255, 255, 0.82);
-    }
-
-    .points__copy .btn {
-      margin-top: 6px;
     }
 
     /* ---------- follow card and follow dock ---------- */
@@ -2129,7 +2229,13 @@
         padding: 24px;
       }
 
-      .points {
+      .score {
+        padding: 36px 24px 28px;
+        border-radius: 28px;
+        box-shadow: 8px 8px 0 var(--white);
+      }
+
+      .rewards {
         padding: 24px;
       }
 
@@ -2344,16 +2450,27 @@
             contributions add up, we’ll unlock more together. The community total below shows our progress.</p>
         </div>
         <div class="bento" id="bento"></div>
-        <div class="points">
-          <div class="points__total">
-            <div class="points__label">Community points</div>
-            <div class="points__figure" id="community-points">0</div>
+        <div class="tally">
+          <div class="score">
+            <span class="score__label">Community points</span>
+            <div class="score__figure" id="community-points">0</div>
+            <p class="score__sub">Points earned together so far</p>
+            <div class="score__foot" id="log">
+              <div class="score__copy">
+                <h3 class="score__title">Your points count for everyone</h3>
+                <p class="score__text">Each challenge you finish earns points for you. Log them, and they are also added
+                  to one community total that everyone taking part builds together.</p>
+                <p class="score__note" id="log-note"></p>
+              </div>
+            </div>
           </div>
-          <div class="points__copy" id="log">
-            <h3 class="points__title">Your points count for everyone</h3>
-            <p class="points__text">Each challenge you finish earns points for you. Log them, and they are also added to
-              one community total that everyone taking part builds together.</p>
-            <p class="points__note" id="log-note"></p>
+          <!-- Rewards placeholder: replace this block once the rewards are ready. -->
+          <div class="rewards" id="rewards">
+            <div class="rewards__copy">
+              <h3 class="rewards__title">Rewards</h3>
+              <p class="rewards__text">Find out what your points unlock, for you and for the whole community.</p>
+            </div>
+            <span class="btn btn--soon">Rewards coming soon</span>
           </div>
         </div>
       </div>
@@ -2717,14 +2834,58 @@
         bento.appendChild(tile);
       });
 
+      /* bonus points for session feedback, as a full-width tile under the challenges */
+      var bonus = CONFIG.feedbackBonus;
+      if (bonus && bonus.points) {
+        var bonusTile = h('article', 'tile tile--bonus');
+        var bonusTop = h('div', 'tile__top');
+        var bonusTags = h('div', 'tags');
+        bonusTags.appendChild(h('span', 'tag tag--solid', 'Bonus points'));
+        bonusTop.appendChild(bonusTags);
+        var bonusPts = h('div', 'pts');
+        bonusPts.style.setProperty('--tilt', '-8deg');
+        bonusPts.appendChild(h('b', '', '+' + bonus.points));
+        bonusPts.appendChild(h('small', '', 'EACH'));
+        bonusTop.appendChild(bonusPts);
+        var bonusText = h('div', 'tile__text');
+        bonusText.appendChild(h('h3', 'tile__name', bonus.name || 'Share Your Feedback'));
+        if (bonus.blurb) bonusText.appendChild(h('p', 'tile__blurb', bonus.blurb));
+        bonusTile.appendChild(bonusTop);
+        bonusTile.appendChild(bonusText);
+        var forms = h('div', 'bonus__forms');
+        sessions.forEach(function (s) {
+          if (!s.feedback) return;
+          var fa = out('btn btn--line', s.feedback);
+          fa.appendChild(h('span', '', s.label + ' feedback'));
+          fa.insertAdjacentHTML('beforeend', ARROW);
+          forms.appendChild(fa);
+        });
+        if (forms.children.length) bonusTile.appendChild(forms);
+        bento.appendChild(bonusTile);
+      }
+
       /* community points and the points log */
       var communityTotal = Number(CONFIG.communityPoints) || 0;
       document.getElementById('community-points').textContent = communityTotal.toLocaleString('en-US');
+      /* keep the big number as large as possible without spilling out of its card */
+      function fitScore() {
+        var fig = document.getElementById('community-points');
+        var card = fig.parentNode;
+        var cs = getComputedStyle(card);
+        fig.style.fontSize = '';
+        var room = card.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        if (fig.scrollWidth > room) {
+          fig.style.fontSize = Math.floor(parseFloat(getComputedStyle(fig).fontSize) * room / fig.scrollWidth) + 'px';
+        }
+      }
+      fitScore();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitScore);
+      window.addEventListener('resize', fitScore);
       var note = document.getElementById('log-note');
       note.textContent = CONFIG.pointsLogNote || '';
       if (!note.textContent) note.hidden = true;
       if (CONFIG.pointsLogLink) {
-        var logBtn = out('btn btn--peach', CONFIG.pointsLogLink);
+        var logBtn = out('btn btn--black', CONFIG.pointsLogLink);
         logBtn.textContent = 'Log your points';
         document.getElementById('log').appendChild(logBtn);
       } else {
